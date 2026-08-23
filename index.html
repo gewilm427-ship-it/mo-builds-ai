@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#07110f">
+<title>Your Name — Athlete, Creator & Traveller</title>
+<style>
+:root{
+  --bg:#07100e;--panel:#0d1916;--panel2:#13231e;--text:#f5f7f6;--muted:#a7b6b0;
+  --line:rgba(255,255,255,.11);--lime:#c8ff62;--aqua:#7be1c0;--cream:#f3ead6;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.wrap{width:min(1180px,calc(100% - 34px));margin:auto}
+nav{position:sticky;top:0;z-index:20;background:rgba(7,16,14,.82);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}
+.nav{min-height:68px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-weight:950;letter-spacing:-.03em;font-size:1.08rem}
+.brand span{color:var(--lime)}
+.links{display:flex;gap:20px;color:var(--muted);font-size:.93rem}
+.links a:hover{color:var(--text)}
+
+.hero{padding:42px 0 68px}
+.hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:28px;align-items:stretch}
+.hero-copy{padding:48px 0;display:flex;flex-direction:column;justify-content:center}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.15em;text-transform:uppercase;color:var(--lime)}
+h1{font-size:clamp(3.6rem,8vw,7.7rem);line-height:.84;letter-spacing:-.075em;margin:14px 0 25px;max-width:800px}
+.hero-copy p{font-size:1.08rem;color:var(--muted);max-width:650px}
+.actions{display:flex;flex-wrap:wrap;gap:11px;margin-top:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:47px;padding:0 18px;border-radius:999px;border:1px solid var(--line);font-weight:850}
+.btn.primary{background:var(--lime);color:#07100e;border-color:transparent}
+.btn:hover{transform:translateY(-1px)}
+
+.collage{display:grid;grid-template-columns:1.15fr .85fr;grid-template-rows:250px 205px;gap:12px}
+.photo{overflow:hidden;border-radius:26px;position:relative;border:1px solid var(--line);background:var(--panel)}
+.photo.big{grid-row:1/3}
+.photo img{transition:.35s ease}
+.photo:hover img{transform:scale(1.025)}
+.badge{position:absolute;left:14px;bottom:14px;background:rgba(7,16,14,.8);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.15);padding:8px 11px;border-radius:999px;font-size:.82rem;font-weight:800}
+
+section{padding:60px 0}
+.section-head{display:flex;justify-content:space-between;gap:25px;align-items:end;margin-bottom:25px}
+.section-head h2{font-size:clamp(2.4rem,5vw,4.4rem);line-height:.95;letter-spacing:-.055em;margin:6px 0 0}
+.section-head p{max-width:520px;color:var(--muted);margin:0}
+
+.project-feature{display:grid;grid-template-columns:1.1fr .9fr;background:linear-gradient(145deg,#10261e,#0b1714);border:1px solid var(--line);border-radius:32px;overflow:hidden}
+.project-image{min-height:450px}
+.project-info{padding:clamp(28px,5vw,54px);display:flex;flex-direction:column;justify-content:center}
+.project-info h3{font-size:clamp(2.5rem,5vw,4.6rem);line-height:.92;letter-spacing:-.055em;margin:10px 0 18px}
+.project-info p{color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:19px 0}
+.tag{font-size:.79rem;padding:7px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.04)}
+
+.padel-live{margin-top:20px;border:1px solid rgba(200,255,98,.28);background:#091713;border-radius:24px;padding:25px}
+.padel-live h4{margin:0 0 8px;font-size:1.35rem}
+.padel-live p{margin:0;color:var(--muted)}
+.padel-menu{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.padel-menu a{padding:15px;border-radius:15px;background:#13251f;border:1px solid #244139;font-weight:800}
+.padel-menu a:hover{border-color:var(--lime)}
+
+.story-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px}
+.story{border-radius:26px;overflow:hidden;min-height:330px;position:relative;border:1px solid var(--line)}
+.story.one{grid-column:span 7}
+.story.two{grid-column:span 5}
+.story.three{grid-column:span 5}
+.story.four{grid-column:span 7}
+.story:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(4,10,8,.85))}
+.story-copy{position:absolute;z-index:2;left:22px;right:22px;bottom:20px}
+.story-copy h3{font-size:1.55rem;margin:0}
+.story-copy p{margin:4px 0 0;color:#d4ded9}
+
+.manifesto{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px;align-items:start}
+.manifesto .bigline{font-size:clamp(2.7rem,6vw,5.7rem);line-height:.92;letter-spacing:-.06em;margin:0}
+.manifesto .body{font-size:1.05rem;color:var(--muted);max-width:650px}
+.values{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:24px}
+.value{padding:18px;border:1px solid var(--line);border-radius:18px;background:rgba(255,255,255,.035)}
+.value b{display:block;color:var(--text);margin-bottom:5px}
+.value span{color:var(--muted);font-size:.9rem}
+
+
+.gallery-strip{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:12px;height:340px}
+.gallery-strip .photo{border-radius:23px}
+
+footer{padding:34px 0 48px;border-top:1px solid var(--line);color:var(--muted)}
+.footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media(max-width:900px){
+ .hero-grid,.project-feature,.manifesto,.pp-grid{grid-template-columns:1fr}
+ .hero-copy{padding-bottom:10px}
+ .project-image{min-height:380px}
+ .story.one,.story.two,.story.three,.story.four{grid-column:span 6}
+ .values,.pp-content{grid-template-columns:1fr 1fr}
+ .gallery-strip{height:auto;grid-template-columns:1fr 1fr}
+ .gallery-strip .photo{min-height:260px}
+ .gallery-strip .photo:first-child{grid-column:1/-1}
+}
+@media(max-width:620px){
+ .links{display:none}
+ .hero{padding-top:22px}
+ .collage{grid-template-columns:1fr 1fr;grid-template-rows:300px 170px}
+ .photo.big{grid-column:1/-1;grid-row:auto}
+ .story.one,.story.two,.story.three,.story.four{grid-column:1/-1}
+ .story{min-height:280px}
+ .values,.pp-content,.padel-menu,.gallery-strip{grid-template-columns:1fr}
+ .gallery-strip .photo:first-child{grid-column:auto}
+ .section-head{align-items:start;flex-direction:column}
+ .padel-page{padding:20px}
+ .pp-main,.pp-card{padding:20px}
+}
+
+.emoji-art{
+  width:100%;height:100%;min-height:inherit;
+  display:grid;place-items:center;
+  font-size:clamp(5rem,12vw,10rem);
+  background:
+    radial-gradient(circle at 30% 25%,rgba(200,255,98,.16),transparent 30%),
+    radial-gradient(circle at 75% 70%,rgba(123,225,192,.14),transparent 32%),
+    linear-gradient(145deg,#13231e,#0a1713);
+  filter:saturate(1.08);
+}
+.story .emoji-art{position:absolute;inset:0}
+.gallery-strip .emoji-art{min-height:260px}
+.project-image .emoji-art{min-height:450px}
+
+</style>
+</head>
+<body>
+<!-- GitHub Pages ready: upload this file at repository root -->
+<nav>
+  <div class="wrap nav">
+    <a class="brand" href="#top">YOURNAME<span>.</span></a>
+    <div class="links">
+      <a href="#work">My Work</a>
+      <a href="#life">My Life</a>
+      <a href="padel/" target="_blank" rel="noopener">PadelPilot ↗</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="kicker">Athlete · Creator · Traveller</div>
+      <h1>Built for<br>movement.</h1>
+      <p>I’m <strong>Your Name</strong> — an athlete, a website creator, and someone who loves travelling, new experiences, and time with friends and family. This is the place where everything I build and everything I’m into comes together.</p>
+      <div class="actions">
+        <a class="btn primary" href="#work">See what I’ve built</a>
+        <a class="btn" href="#life">See my world</a>
+      </div>
+    </div>
+    <div class="collage">
+      <div class="photo big"><div class="emoji-art" role="img" aria-label="Padel players on court">🎾</div><span class="badge">Sport is part of me</span></div>
+      <div class="photo"><div class="emoji-art" role="img" aria-label="Friends overlooking a coastal city">🫂</div><span class="badge">Go somewhere new</span></div>
+      <div class="photo"><div class="emoji-art" role="img" aria-label="Traveller in the mountains">🏔️</div><span class="badge">Keep exploring</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Selected project</div><h2>Things I build.</h2></div>
+      <p>I like turning ideas into real websites. PadelPilot is one of the projects I’ve created.</p>
+    </div>
+
+    <article class="project-feature">
+      <div class="project-image"><div class="emoji-art" role="img" aria-label="Padel match">🎾</div></div>
+      <div class="project-info">
+        <div class="kicker">01 · PadelPilot</div>
+        <h3>Train smarter.<br>Fix your technique.</h3>
+        <p>An AI padel coaching concept built around video analysis, practical technique feedback, coaching guidance, racket recommendations and progress tracking.</p>
+        <div class="tags"><span class="tag">Padel</span><span class="tag">AI coaching</span><span class="tag">Sport tech</span><span class="tag">Website</span></div>
+        <div class="actions">
+          <a class="btn primary" href="padel/" target="_blank" rel="noopener">Open PadelPilot ↗</a>
+          <a class="btn" href="padel/">Standalone page ↗</a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section id="life">
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">Outside the screen</div><h2>This is my world.</h2></div>
+      <p>Sport, trips, good people and the moments you actually remember.</p>
+    </div>
+    <div class="story-grid">
+      <article class="story one"><div class="emoji-art" role="img" aria-label="Coastal travel view">🌊</div><div class="story-copy"><h3>Travel</h3><p>New places change the way you see everything.</p></div></article>
+      <article class="story two"><div class="emoji-art" role="img" aria-label="Family exercising together">👨‍👩‍👧‍👦</div><div class="story-copy"><h3>Family</h3><p>The people who keep everything grounded.</p></div></article>
+      <article class="story three"><div class="emoji-art" role="img" aria-label="Padel players">🎾</div><div class="story-copy"><h3>Competition</h3><p>Train, improve, compete, repeat.</p></div></article>
+      <article class="story four"><div class="emoji-art" role="img" aria-label="Friends travelling together">🫂</div><div class="story-copy"><h3>Friends & memories</h3><p>The best trips are better with people you care about.</p></div></article>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap manifesto">
+    <div><div class="kicker">About me</div><p class="bigline">More than one lane.</p></div>
+    <div>
+      <p class="body">I like having different things going on. Sport gives me discipline and competition. Building websites lets me create. Travelling gives me perspective. Friends and family are the part that makes all of it worth enjoying.</p>
+      <div class="values">
+        <div class="value"><b>Athlete mindset</b><span>Consistency, focus and improvement.</span></div>
+        <div class="value"><b>Creator energy</b><span>Turning an idea into something real.</span></div>
+        <div class="value"><b>Experience first</b><span>Go places. Meet people. Make memories.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <div><div class="kicker">A few more frames</div><h2>Life in motion.</h2></div>
+    </div>
+    <div class="gallery-strip">
+      <div class="photo"><div class="emoji-art" role="img" aria-label="Mountain travel">🏔️</div></div>
+      <div class="photo"><div class="emoji-art" role="img" aria-label="Coastline travel">🌊</div></div>
+      <div class="photo"><div class="emoji-art" role="img" aria-label="Family outdoors">👨‍👩‍👧‍👦</div></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap footer"><span>© 2026 Your Name</span><span>Athlete · Creator · Traveller</span></div>
+</footer>
+</body>
+</html>
