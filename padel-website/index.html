@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07110e">
+
+<title>PadelPilot — Digital Padel Coach</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: #07110e;
+    color: #f4f7f5;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* NAV */
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(7,17,14,.96);
+    border-bottom: 1px solid #244138;
+}
+
+.navbar {
+    max-width: 1150px;
+    margin: auto;
+    min-height: 70px;
+    padding: 12px 20px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    width: 44px;
+    height: 44px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 13px;
+
+    background: #bafc57;
+    color: #07110e;
+
+    font-weight: 900;
+}
+
+.brand-text strong {
+    display: block;
+    font-size: 18px;
+}
+
+.brand-text span {
+    color: #9ab0a7;
+    font-size: 11px;
+}
+
+.links {
+    display: flex;
+    gap: 18px;
+
+    color: #9ab0a7;
+    font-size: 14px;
+}
+
+.links a:hover {
+    color: #bafc57;
+}
+
+/* GENERAL */
+
+.container {
+    width: min(1150px, calc(100% - 34px));
+    margin: auto;
+}
+
+section {
+    padding: 75px 0;
+}
+
+.eyebrow {
+    color: #bafc57;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(58px, 9vw, 105px);
+    line-height: .88;
+
+    letter-spacing: -.065em;
+
+    margin: 15px 0 22px;
+}
+
+h2 {
+    font-size: clamp(36px, 6vw, 64px);
+
+    letter-spacing: -.05em;
+
+    margin: 8px 0 15px;
+}
+
+p {
+    color: #9ab0a7;
+    line-height: 1.65;
+}
+
+/* HERO */
+
+.hero {
+    padding-top: 55px;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.3fr .7fr;
+
+    gap: 18px;
+}
+
+.hero-main {
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding: clamp(30px, 6vw, 65px);
+
+    border: 1px solid #244138;
+    border-radius: 28px;
+
+    background:
+        radial-gradient(
+            circle at 90% 90%,
+            rgba(186,252,87,.12),
+            transparent 30%
+        ),
+        #0e1b17;
+}
+
+.hero-main p {
+    max-width: 620px;
+    font-size: 17px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 47px;
+
+    padding: 0 18px;
+
+    border-radius: 12px;
+    border: 1px solid #244138;
+
+    background: #1b3029;
+
+    font-weight: 800;
+}
+
+.button.primary {
+    background: #bafc57;
+    color: #07110e;
+
+    border-color: #bafc57;
+}
+
+.button:hover {
+    border-color: #bafc57;
+}
+
+/* HERO SIDE */
+
+.hero-side {
+    display: grid;
+    gap: 14px;
+}
+
+.stat {
+    padding: 25px;
+
+    border-radius: 23px;
+    border: 1px solid #244138;
+
+    background: #0e1b17;
+}
+
+.stat strong {
+    display: block;
+
+    font-size: 38px;
+
+    margin: 9px 0;
+}
+
+/* HEADINGS */
+
+.section-head {
+    margin-bottom: 24px;
+}
+
+/* CARDS */
+
+.grid {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 14px;
+}
+
+.card {
+    padding: 23px;
+
+    border: 1px solid #244138;
+    border-radius: 20px;
+
+    background: #0e1b17;
+}
+
+.card h3 {
+    margin: 9px 0 7px;
+
+    font-size: 22px;
+}
+
+.card p {
+    margin-bottom: 0;
+}
+
+/* EMOJI */
+
+.emoji {
+    min-height: 170px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 16px;
+
+    border-radius: 18px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(186,252,87,.12),
+            transparent 55%
+        ),
+        #10231d;
+
+    font-size: 76px;
+}
+
+/* COACH */
+
+.coach {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+}
+
+.question {
+    padding: 22px;
+
+    border-radius: 20px;
+    border: 1px solid #244138;
+
+    background: #10231d;
+}
+
+.question strong {
+    display: block;
+
+    color: #bafc57;
+
+    margin-bottom: 8px;
+}
+
+/* GEAR */
+
+.gear {
+    display: grid;
+
+    grid-template-columns: .8fr 1.2fr;
+
+    gap: 16px;
+
+    align-items: stretch;
+}
+
+.racket {
+    min-height: 360px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 25px;
+    border: 1px solid #244138;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(186,252,87,.15),
+            transparent 45%
+        ),
+        #0e1b17;
+
+    font-size: 120px;
+}
+
+.gear-info {
+    padding: 35px;
+
+    border-radius: 25px;
+    border: 1px solid #244138;
+
+    background: #0e1b17;
+}
+
+/* PROGRESS */
+
+.progress {
+    margin-top: 16px;
+}
+
+.progress-row {
+    margin: 20px 0;
+}
+
+.progress-label {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+}
+
+.bar {
+    height: 10px;
+
+    overflow: hidden;
+
+    border-radius: 100px;
+
+    background: #07110e;
+}
+
+.fill {
+    height: 100%;
+
+    border-radius: 100px;
+
+    background: #bafc57;
+}
+
+/* FOOTER */
+
+footer {
+    padding: 35px 0;
+
+    border-top: 1px solid #244138;
+
+    color: #9ab0a7;
+
+    text-align: center;
+}
+
+/* MOBILE */
+
+@media (max-width: 800px) {
+
+    .links {
+        display: none;
+    }
+
+    .hero-grid,
+    .coach,
+    .gear {
+        grid-template-columns: 1fr;
+    }
+
+    .grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-main {
+        min-height: auto;
+    }
+}
+
+@media (max-width: 550px) {
+
+    section {
+        padding: 55px 0;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-main {
+        padding: 28px 22px;
+    }
+
+    h1 {
+        font-size: 58px;
+    }
+
+    .buttons {
+        display: grid;
+    }
+
+    .button {
+        width: 100%;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<nav>
+
+<div class="navbar">
+
+    <a class="brand" href="#home">
+
+        <div class="logo">
+            PP
+        </div>
+
+        <div class="brand-text">
+            <strong>PadelPilot</strong>
+            <span>DIGITAL PADEL COACH</span>
+        </div>
+
+    </a>
+
+    <div class="links">
+
+        <a href="#techniques">Techniques</a>
+
+        <a href="#coach">Coach</a>
+
+        <a href="#gear">Gear</a>
+
+        <a href="#progress">Progress</a>
+
+    </div>
+
+</div>
+
+</nav>
+
+
+<main>
+
+
+<!-- HOME -->
+
+<section class="hero" id="home">
+
+<div class="container hero-grid">
+
+    <div class="hero-main">
+
+        <span class="eyebrow">
+            Your digital padel coach
+        </span>
+
+        <h1>
+            See the shot.<br>
+            Fix the shot.
+        </h1>
+
+        <p>
+            PadelPilot helps you understand your technique,
+            train smarter and improve your game with simple,
+            practical coaching advice.
+        </p>
+
+        <div class="buttons">
+
+            <a
+                class="button primary"
+                href="#techniques"
+            >
+                Explore techniques
+            </a>
+
+            <a
+                class="button"
+                href="#coach"
+            >
+                Ask the coach
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-side">
+
+        <div class="stat">
+
+            <span class="eyebrow">
+                Focus score
+            </span>
+
+            <strong>
+                76
+            </strong>
+
+            <p>
+                Keep improving your preparation,
+                spacing and recovery.
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="eyebrow">
+                This week
+            </span>
+
+            <strong>
+                3 drills
+            </strong>
+
+            <p>
+                Focus on early preparation,
+                clean contact and court position.
+            </p>
+
+        </div>
+
+
+        <div class="stat">
+
+            <span class="eyebrow">
+                Coach tip
+            </span>
+
+            <strong>
+                Early prep
+            </strong>
+
+            <p>
+                Win time before contact instead of
+                rushing during your swing.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- TECHNIQUES -->
+
+<section id="techniques">
+
+<div class="container">
+
+    <div class="section-head">
+
+        <span class="eyebrow">
+            Technique library
+        </span>
+
+        <h2>
+            Build better mechanics.
+        </h2>
+
+        <p>
+            Simple things to remember when you're on court.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <article class="card">
+
+            <div class="emoji">
+                🎾
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Bandeja
+            </h3>
+
+            <p>
+                Turn early. Keep your non-dominant arm up.
+                Contact the ball high and slightly in front,
+                then recover toward the net.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="emoji">
+                ⚡
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Vibora
+            </h3>
+
+            <p>
+                Coil your shoulder, keep the swing compact
+                and brush around the outside of the ball
+                to create controlled side spin.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="emoji">
+                🥎
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Forehand volley
+            </h3>
+
+            <p>
+                Keep the racket in front,
+                use a small step and make contact
+                ahead of your body.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="emoji">
+                🛡️
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Backhand volley
+            </h3>
+
+            <p>
+                Turn your shoulders,
+                keep your elbow in front
+                and use a short stable movement.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="emoji">
+                💥
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Smash
+            </h3>
+
+            <p>
+                Get underneath the ball,
+                load your legs,
+                reach tall and finish balanced.
+            </p>
+
+        </article>
+
+
+        <article class="card">
+
+            <div class="emoji">
+                🧱
+            </div>
+
+            <span class="eyebrow">
+                Technique
+            </span>
+
+            <h3>
+                Back-glass defence
+            </h3>
+
+            <p>
+                Give the ball room to reach the glass.
+                Read the rebound first,
+                then adjust with small steps.
+            </p>
+
+        </article>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- COACH -->
+
+<section id="coach">
+
+<div class="container">
+
+    <div class="section-head">
+
+        <span class="eyebrow">
+            PadelPilot Coach
+        </span>
+
+        <h2>
+            Fix the problem.
+        </h2>
+
+        <p>
+            Common problems and what to focus on first.
+        </p>
+
+    </div>
+
+
+    <div class="coach">
+
+
+        <div class="question">
+
+            <strong>
+                Why does my bandeja sit up?
+            </strong>
+
+            <p>
+                Reduce the size of your swing.
+                Contact the ball high and slightly in front.
+                Think about controlling the lob and keeping
+                the net instead of trying to hit a winner.
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <strong>
+                Why do my volleys hit the net?
+            </strong>
+
+            <p>
+                Keep your racket in front of your body
+                and shorten the backswing.
+                Let a small forward step carry the shot
+                instead of chopping down with your arm.
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <strong>
+                How do I defend the back glass?
+            </strong>
+
+            <p>
+                Don't stand too close to the bounce.
+                Give the ball space to travel into the glass,
+                read the rebound and then move your feet.
+            </p>
+
+        </div>
+
+
+        <div class="question">
+
+            <strong>
+                What should I practise first?
+            </strong>
+
+            <p>
+                Pick one observable change at a time.
+                Start with preparation,
+                then contact point,
+                then recovery position.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- GEAR -->
+
+<section id="gear">
+
+<div class="container">
+
+    <div class="section-head">
+
+        <span class="eyebrow">
+            Racket profile
+        </span>
+
+        <h2>
+            Choose control before ego.
+        </h2>
+
+    </div>
+
+
+    <div class="gear">
+
+
+        <div class="racket">
+            🎾
+        </div>
+
+
+        <div class="gear-info">
+
+            <span class="eyebrow">
+                Recommended starting point
+            </span>
+
+            <h2>
+                Teardrop.
+                Medium balance.
+            </h2>
+
+            <p>
+                A versatile profile gives you accessible
+                power without demanding the timing of
+                a very head-heavy diamond racket.
+            </p>
+
+            <p>
+                Prioritise a manageable weight,
+                a comfortable grip and a sweet spot
+                you can find consistently.
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- PROGRESS -->
+
+<section id="progress">
+
+<div class="container">
+
+    <div class="section-head">
+
+        <span class="eyebrow">
+            Your progress
+        </span>
+
+        <h2>
+            Measure what matters.
+        </h2>
+
+        <p>
+            Example technique scores for your training.
+        </p>
+
+    </div>
+
+
+    <div class="grid">
+
+        <div class="card">
+
+            <span class="eyebrow">
+                Sessions
+            </span>
+
+            <h2>
+                8
+            </h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="eyebrow">
+                Clips
+            </span>
+
+            <h2>
+                21
+            </h2>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="eyebrow">
+                Drills
+            </span>
+
+            <h2>
+                14
+            </h2>
+
+        </div>
+
+    </div>
+
+
+    <div class="card progress">
+
+
+        <div class="progress-row">
+
+            <div class="progress-label">
+
+                <span>
+                    Bandeja
+                </span>
+
+                <strong>
+                    78%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width:78%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-row">
+
+            <div class="progress-label">
+
+                <span>
+                    Forehand volley
+                </span>
+
+                <strong>
+                    72%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width:72%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-row">
+
+            <div class="progress-label">
+
+                <span>
+                    Back-glass defence
+                </span>
+
+                <strong>
+                    64%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width:64%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-row">
+
+            <div class="progress-label">
+
+                <span>
+                    Smash
+                </span>
+
+                <strong>
+                    58%
+                </strong>
+
+            </div>
+
+            <div class="bar">
+
+                <div
+                    class="fill"
+                    style="width:58%"
+                ></div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+</section>
+
+
+</main>
+
+
+<footer>
+
+<div class="container">
+
+    🎾 PadelPilot · Train smarter. Play better.
+
+</div>
+
+</footer>
+
+
+</body>
+</html>
