@@ -1,0 +1,1913 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="theme-color" content="#07110e">
+
+  <title>PadelPilot Community — Tips & Techniques</title>
+
+  <link
+    rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💡</text></svg>"
+  >
+
+  <style>
+
+    :root {
+      --bg: #07110e;
+      --panel: #0e1b17;
+      --panel-2: #13231e;
+      --panel-3: #173329;
+
+      --line: #244138;
+
+      --text: #f4f7f5;
+      --muted: #9ab0a7;
+
+      --accent: #bafc57;
+      --accent-2: #78dcb0;
+
+      --danger: #ff8f70;
+
+      --shadow: 0 22px 60px rgba(0, 0, 0, 0.28);
+
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+
+      min-height: 100vh;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          #17382d 0,
+          transparent 30%
+        ),
+        var(--bg);
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 32px));
+      margin: auto;
+    }
+
+    /* =========================
+       NAVIGATION
+       ========================= */
+
+    nav {
+      position: sticky;
+      top: 0;
+
+      z-index: 100;
+
+      border-bottom: 1px solid rgba(36, 65, 56, 0.75);
+
+      background: rgba(7, 17, 14, 0.88);
+
+      backdrop-filter: blur(16px);
+    }
+
+    .navbar {
+      min-height: 72px;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+
+      align-items: center;
+
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+
+      border-radius: 14px;
+
+      display: grid;
+      place-items: center;
+
+      background: var(--accent);
+
+      color: #07110e;
+
+      font-weight: 950;
+
+      transform: rotate(-5deg);
+    }
+
+    .brand-copy strong {
+      display: block;
+
+      font-size: 18px;
+    }
+
+    .brand-copy span {
+      display: block;
+
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+
+      letter-spacing: 0.1em;
+
+      text-transform: uppercase;
+    }
+
+    .back-link {
+      color: var(--muted);
+
+      font-size: 14px;
+
+      padding: 9px 13px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 999px;
+
+      transition: 0.2s;
+    }
+
+    .back-link:hover {
+      color: var(--text);
+
+      border-color: var(--accent);
+    }
+
+    /* =========================
+       HERO
+       ========================= */
+
+    .hero {
+      padding: 60px 0 35px;
+    }
+
+    .hero-shell {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: clamp(30px, 6vw, 64px);
+
+      border: 1px solid var(--line);
+
+      border-radius: 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(19, 35, 30, 0.97),
+          rgba(12, 25, 21, 0.96)
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+    .hero-shell::after {
+      content: "";
+
+      position: absolute;
+
+      width: 320px;
+      height: 320px;
+
+      right: -130px;
+      bottom: -130px;
+
+      border: 45px solid rgba(186, 252, 87, 0.07);
+
+      border-radius: 50%;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+
+      font-size: 12px;
+
+      font-weight: 900;
+
+      letter-spacing: 0.14em;
+
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      position: relative;
+
+      z-index: 1;
+
+      max-width: 850px;
+
+      margin: 14px 0 18px;
+
+      font-size: clamp(46px, 8vw, 88px);
+
+      line-height: 0.92;
+
+      letter-spacing: -0.065em;
+    }
+
+    .hero p {
+      position: relative;
+
+      z-index: 1;
+
+      max-width: 720px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+
+      line-height: 1.65;
+    }
+
+    .hero-stats {
+      position: relative;
+
+      z-index: 1;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 10px;
+
+      margin-top: 24px;
+    }
+
+    .hero-stat {
+      padding: 10px 14px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 999px;
+
+      background: rgba(255, 255, 255, 0.03);
+
+      color: #dce8e2;
+
+      font-size: 13px;
+
+      font-weight: 700;
+    }
+
+    .hero-stat strong {
+      color: var(--accent);
+    }
+
+    /* =========================
+       MAIN APP
+       ========================= */
+
+    .app {
+      padding: 20px 0 70px;
+    }
+
+    .app-toolbar {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 16px;
+
+      margin-bottom: 18px;
+    }
+
+    .tabs {
+      display: flex;
+
+      gap: 8px;
+
+      padding: 6px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 15px;
+
+      background: var(--panel);
+
+      width: max-content;
+    }
+
+    .tab-btn {
+      border: 0;
+
+      border-radius: 10px;
+
+      padding: 11px 16px;
+
+      color: var(--muted);
+
+      background: transparent;
+
+      font-weight: 800;
+
+      transition: 0.18s;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+    }
+
+    .tab-btn.active {
+      background: var(--accent);
+
+      color: #07110e;
+    }
+
+    .stats-pill {
+      padding: 10px 14px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 999px;
+
+      color: var(--muted);
+
+      background: var(--panel);
+
+      font-size: 13px;
+    }
+
+    .stats-pill strong {
+      color: var(--accent);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* =========================
+       FILTER CARD
+       ========================= */
+
+    .filter-card {
+      margin-bottom: 16px;
+
+      padding: 20px;
+
+      border: 1px solid var(--line);
+
+      border-radius: var(--radius);
+
+      background: var(--panel);
+
+      box-shadow: var(--shadow);
+    }
+
+    .filter-grid {
+      display: grid;
+
+      grid-template-columns: 1.3fr 1fr 1fr;
+
+      gap: 12px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+
+      border: 1px solid var(--line);
+
+      border-radius: 12px;
+
+      outline: none;
+
+      padding: 13px 14px;
+
+      background: #091713;
+
+      color: var(--text);
+
+      transition: 0.18s;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: #60756d;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #5f997f;
+
+      box-shadow: 0 0 0 3px rgba(186, 252, 87, 0.08);
+    }
+
+    /* =========================
+       TIP GRID
+       ========================= */
+
+    .tip-grid {
+      display: grid;
+
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+
+      gap: 14px;
+    }
+
+    .tip-card {
+      position: relative;
+
+      overflow: hidden;
+
+      padding: 23px;
+
+      border: 1px solid var(--line);
+
+      border-radius: var(--radius);
+
+      background:
+        linear-gradient(
+          150deg,
+          rgba(19, 35, 30, 0.96),
+          rgba(12, 25, 21, 0.95)
+        );
+
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+
+      transition: 0.2s;
+    }
+
+    .tip-card:hover {
+      transform: translateY(-3px);
+
+      border-color: rgba(186, 252, 87, 0.35);
+    }
+
+    .tip-top {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-bottom: 17px;
+    }
+
+    .tip-tags {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+    }
+
+    .badge {
+      padding: 6px 9px;
+
+      border-radius: 999px;
+
+      font-size: 11px;
+
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: 0.05em;
+    }
+
+    .badge-shot {
+      color: #07110e;
+
+      background: var(--accent);
+    }
+
+    .badge-level {
+      color: #dce8e2;
+
+      border: 1px solid var(--line);
+
+      background: var(--panel-2);
+    }
+
+    .tip-number {
+      color: #526961;
+
+      font-size: 12px;
+
+      font-weight: 800;
+    }
+
+    .tip-content {
+      color: #dce6e1;
+
+      line-height: 1.7;
+
+      white-space: pre-wrap;
+
+      word-break: break-word;
+    }
+
+    .tip-footer {
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 10px;
+
+      margin-top: 22px;
+
+      padding-top: 15px;
+
+      border-top: 1px solid var(--line);
+    }
+
+    .tip-author {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .tip-author strong {
+      color: var(--text);
+    }
+
+    /* =========================
+       ADD TIP
+       ========================= */
+
+    .form-shell {
+      display: grid;
+
+      grid-template-columns: 0.75fr 1.25fr;
+
+      gap: 18px;
+    }
+
+    .form-intro,
+    .form-card {
+      border: 1px solid var(--line);
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          150deg,
+          rgba(19, 35, 30, 0.97),
+          rgba(12, 25, 21, 0.95)
+        );
+
+      box-shadow: var(--shadow);
+    }
+
+    .form-intro {
+      padding: 32px;
+
+      display: flex;
+
+      flex-direction: column;
+
+      justify-content: space-between;
+    }
+
+    .form-intro h2 {
+      margin: 12px 0 15px;
+
+      font-size: clamp(34px, 5vw, 55px);
+
+      line-height: 0.95;
+
+      letter-spacing: -0.05em;
+    }
+
+    .form-intro p {
+      color: var(--muted);
+
+      line-height: 1.65;
+    }
+
+    .form-emoji {
+      margin-top: 40px;
+
+      font-size: 90px;
+    }
+
+    .form-card {
+      padding: 28px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #d9e5df;
+
+      font-size: 13px;
+
+      font-weight: 800;
+    }
+
+    textarea {
+      min-height: 145px;
+
+      resize: vertical;
+    }
+
+    .character-count {
+      margin-top: 5px;
+
+      color: #60756d;
+
+      font-size: 11px;
+
+      text-align: right;
+    }
+
+    .submit-btn {
+      width: 100%;
+
+      min-height: 50px;
+
+      border: 0;
+
+      border-radius: 13px;
+
+      background: var(--accent);
+
+      color: #07110e;
+
+      font-weight: 900;
+
+      transition: 0.18s;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .alert {
+      display: none;
+
+      margin-bottom: 15px;
+
+      padding: 13px 15px;
+
+      border: 1px solid rgba(255, 143, 112, 0.28);
+
+      border-radius: 13px;
+
+      color: #ffc3b1;
+
+      background: rgba(255, 143, 112, 0.08);
+    }
+
+    .success {
+      display: none;
+
+      margin-bottom: 15px;
+
+      padding: 13px 15px;
+
+      border: 1px solid rgba(186, 252, 87, 0.3);
+
+      border-radius: 13px;
+
+      color: var(--accent);
+
+      background: rgba(186, 252, 87, 0.07);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+
+      padding: 50px 20px;
+
+      border: 1px dashed #345a4c;
+
+      border-radius: 22px;
+
+      color: var(--muted);
+
+      text-align: center;
+
+      background: rgba(19, 35, 30, 0.55);
+    }
+
+    .empty-state span {
+      display: block;
+
+      margin-bottom: 9px;
+
+      font-size: 42px;
+    }
+
+    /* =========================
+       FOOTER
+       ========================= */
+
+    footer {
+      padding: 26px 0 38px;
+
+      border-top: 1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    .footer-inner {
+      display: flex;
+
+      justify-content: space-between;
+
+      gap: 20px;
+
+      flex-wrap: wrap;
+    }
+
+    /* =========================
+       MOBILE
+       ========================= */
+
+    @media (max-width: 850px) {
+
+      .tip-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-shell {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-grid input {
+        grid-column: 1 / -1;
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .container {
+        width: min(100% - 24px, 1180px);
+      }
+
+      .navbar {
+        min-height: 64px;
+      }
+
+      .back-link {
+        font-size: 0;
+
+        width: 42px;
+        height: 42px;
+
+        display: grid;
+        place-items: center;
+      }
+
+      .back-link::after {
+        content: "←";
+
+        font-size: 18px;
+      }
+
+      .hero {
+        padding-top: 28px;
+      }
+
+      .hero-shell {
+        padding: 27px 21px;
+
+        border-radius: 22px;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+      }
+
+      .app-toolbar {
+        align-items: stretch;
+
+        flex-direction: column;
+      }
+
+      .tabs {
+        width: 100%;
+      }
+
+      .tab-btn {
+        flex: 1;
+      }
+
+      .stats-pill {
+        width: max-content;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-grid input {
+        grid-column: auto;
+      }
+
+      .filter-card {
+        padding: 15px;
+      }
+
+      .tip-card {
+        padding: 19px;
+      }
+
+      .form-intro,
+      .form-card {
+        padding: 22px;
+
+        border-radius: 19px;
+      }
+
+      .form-emoji {
+        margin-top: 22px;
+
+        font-size: 65px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+       ========================= -->
+
+  <nav>
+
+    <div class="container navbar">
+
+      <a
+        class="brand"
+        href="#"
+      >
+
+        <div class="logo">
+          PP
+        </div>
+
+        <div class="brand-copy">
+
+          <strong>
+            PadelPilot
+          </strong>
+
+          <span>
+            Community Lab
+          </span>
+
+        </div>
+
+      </a>
+
+      <a
+        class="back-link"
+        href="../padel-website/"
+      >
+        ← Back to PadelPilot
+      </a>
+
+    </div>
+
+  </nav>
+
+
+  <!-- =========================
+       HERO
+       ========================= -->
+
+  <section class="hero">
+
+    <div class="container">
+
+      <div class="hero-shell">
+
+        <div class="eyebrow">
+          PadelPilot Community
+        </div>
+
+        <h1>
+          Learn from<br>
+          other players.
+        </h1>
+
+        <p>
+          Browse practical padel advice from other players,
+          filter tips by shot and skill level,
+          or share something that has improved your own game.
+        </p>
+
+        <div class="hero-stats">
+
+          <div class="hero-stat">
+            <strong id="hero-count">
+              20
+            </strong>
+            tips shared
+          </div>
+
+          <div class="hero-stat">
+            🎾 6 shot categories
+          </div>
+
+          <div class="hero-stat">
+            📈 Beginner to advanced
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       APP
+       ========================= -->
+
+  <main class="app">
+
+    <div class="container">
+
+      <div class="app-toolbar">
+
+        <div class="tabs">
+
+          <button
+            class="tab-btn active"
+            onclick="switchView('browse')"
+          >
+            Browse Tips
+          </button>
+
+          <button
+            class="tab-btn"
+            onclick="switchView('add')"
+          >
+            + Share a Tip
+          </button>
+
+        </div>
+
+        <div class="stats-pill">
+          Total:
+          <strong id="total-count">
+            0
+          </strong>
+        </div>
+
+      </div>
+
+
+      <!-- =========================
+           BROWSE
+           ========================= -->
+
+      <section
+        id="browse-view"
+        class="view active"
+      >
+
+        <div class="filter-card">
+
+          <div class="filter-grid">
+
+            <input
+              id="search-input"
+              type="search"
+              placeholder="Search tips or player names..."
+              oninput="renderTips()"
+            >
+
+
+            <select
+              id="filter-shot"
+              onchange="renderTips()"
+            >
+
+              <option value="All">
+                All Shot Types
+              </option>
+
+              <option value="Glass">
+                Glass
+              </option>
+
+              <option value="Volley">
+                Volley
+              </option>
+
+              <option value="Smash">
+                Smash
+              </option>
+
+              <option value="Rulo">
+                Rulo
+              </option>
+
+              <option value="Bandeja">
+                Bandeja
+              </option>
+
+              <option value="Vibora">
+                Vibora
+              </option>
+
+            </select>
+
+
+            <select
+              id="filter-level"
+              onchange="renderTips()"
+            >
+
+              <option value="All">
+                All Skill Levels
+              </option>
+
+              <option value="Beginner">
+                Beginner
+              </option>
+
+              <option value="Intermediate">
+                Intermediate
+              </option>
+
+              <option value="Advanced">
+                Advanced
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="tip-list-container"
+          class="tip-grid"
+        ></div>
+
+      </section>
+
+
+      <!-- =========================
+           ADD TIP
+           ========================= -->
+
+      <section
+        id="add-view"
+        class="view"
+      >
+
+        <div class="form-shell">
+
+          <div class="form-intro">
+
+            <div>
+
+              <div class="eyebrow">
+                Share what works
+              </div>
+
+              <h2>
+                Help another player improve.
+              </h2>
+
+              <p>
+                Keep it practical. Explain one technique,
+                correction, cue or idea another player can
+                actually try during their next session.
+              </p>
+
+            </div>
+
+            <div class="form-emoji">
+              💡🎾
+            </div>
+
+          </div>
+
+
+          <div class="form-card">
+
+            <div
+              id="form-alert"
+              class="alert"
+            >
+              Please complete every field before sharing your tip.
+            </div>
+
+            <div
+              id="form-success"
+              class="success"
+            >
+              Tip added successfully.
+            </div>
+
+
+            <form
+              id="tip-form"
+              onsubmit="handleFormSubmit(event)"
+            >
+
+              <div class="form-group">
+
+                <label for="player_name">
+                  Your Name
+                </label>
+
+                <input
+                  type="text"
+                  id="player_name"
+                  maxlength="50"
+                  placeholder="e.g. Mo"
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="shot_type">
+                  Shot Type
+                </label>
+
+                <select id="shot_type">
+
+                  <option value="">
+                    Select a shot type...
+                  </option>
+
+                  <option value="Glass">
+                    Glass
+                  </option>
+
+                  <option value="Volley">
+                    Volley
+                  </option>
+
+                  <option value="Smash">
+                    Smash
+                  </option>
+
+                  <option value="Rulo">
+                    Rulo
+                  </option>
+
+                  <option value="Bandeja">
+                    Bandeja
+                  </option>
+
+                  <option value="Vibora">
+                    Vibora
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="level">
+                  Target Skill Level
+                </label>
+
+                <select id="level">
+
+                  <option value="">
+                    Select a level...
+                  </option>
+
+                  <option value="Beginner">
+                    Beginner
+                  </option>
+
+                  <option value="Intermediate">
+                    Intermediate
+                  </option>
+
+                  <option value="Advanced">
+                    Advanced
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="how_to_do">
+                  How to do it
+                </label>
+
+                <textarea
+                  id="how_to_do"
+                  maxlength="500"
+                  placeholder="Explain the technique, cue or correction..."
+                  oninput="updateCharacterCount()"
+                ></textarea>
+
+                <div class="character-count">
+                  <span id="character-count">0</span>
+                  / 500
+                </div>
+
+              </div>
+
+
+              <button
+                class="submit-btn"
+                type="submit"
+              >
+                Share Tip
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        🎾 PadelPilot Community
+      </span>
+
+      <span>
+        Players helping players.
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    /* =========================
+       STARTING DATA
+       ========================= */
+
+    const startingTips = [
+
+      {
+        id: 1,
+        player_name: "Sean",
+        shot_type: "Bandeja",
+        level: "Intermediate",
+        how_to_do:
+          "Hit the ball at head height with a sideways body posture. Aim for deep control into the corners, not raw power."
+      },
+
+      {
+        id: 2,
+        player_name: "Elena",
+        shot_type: "Glass",
+        level: "Beginner",
+        how_to_do:
+          "Let the ball hit the back glass before making your swing. Give the ball space and let the rebound bring it back into your hitting zone."
+      },
+
+      {
+        id: 3,
+        player_name: "Marco",
+        shot_type: "Vibora",
+        level: "Advanced",
+        how_to_do:
+          "Apply side spin by brushing around the outside of the ball. Keep the acceleration compact so the ball stays low after the glass."
+      },
+
+      {
+        id: 4,
+        player_name: "Sara",
+        shot_type: "Volley",
+        level: "Beginner",
+        how_to_do:
+          "Keep the swing short and compact. Block the ball rather than taking a full backswing so you maintain control at the net."
+      },
+
+      {
+        id: 5,
+        player_name: "Lucas",
+        shot_type: "Smash",
+        level: "Intermediate",
+        how_to_do:
+          "Get underneath the ball early and make contact at your highest comfortable point. Use your legs and timing instead of trying to create all the power with your arm."
+      },
+
+      {
+        id: 6,
+        player_name: "David",
+        shot_type: "Rulo",
+        level: "Advanced",
+        how_to_do:
+          "Use topspin and aim toward the opposite side fence. The goal is placement and an awkward rebound rather than maximum speed."
+      },
+
+      {
+        id: 7,
+        player_name: "Carlos",
+        shot_type: "Glass",
+        level: "Intermediate",
+        how_to_do:
+          "For double-glass defence, turn your shoulders early and track the ball around the corner before deciding where your contact point will be."
+      },
+
+      {
+        id: 8,
+        player_name: "Ana",
+        shot_type: "Volley",
+        level: "Advanced",
+        how_to_do:
+          "Step through the volley with the opposite foot to transfer your body weight forward. Aim deep or toward the opponents' feet."
+      },
+
+      {
+        id: 9,
+        player_name: "Tom",
+        shot_type: "Bandeja",
+        level: "Beginner",
+        how_to_do:
+          "Keep your non-dominant hand pointing toward the ball while preparing. It helps your balance, shoulder turn and spacing."
+      },
+
+      {
+        id: 10,
+        player_name: "Sofia",
+        shot_type: "Smash",
+        level: "Advanced",
+        how_to_do:
+          "For a kick smash, get underneath the ball and brush upward through contact to create topspin that makes the ball climb aggressively after the glass."
+      },
+
+      {
+        id: 11,
+        player_name: "Javier",
+        shot_type: "Vibora",
+        level: "Intermediate",
+        how_to_do:
+          "Contact the ball slightly farther to your hitting side than on a bandeja and use controlled side slice rather than a huge swing."
+      },
+
+      {
+        id: 12,
+        player_name: "Mia",
+        shot_type: "Rulo",
+        level: "Intermediate",
+        how_to_do:
+          "Aim controlled topspin toward the fence. The purpose is to create an unpredictable rebound and move the defender out of position."
+      },
+
+      {
+        id: 13,
+        player_name: "Leo",
+        shot_type: "Glass",
+        level: "Advanced",
+        how_to_do:
+          "For an attacking bajada, let the ball rebound from the glass, move into position early and accelerate through a comfortable shoulder-height contact."
+      },
+
+      {
+        id: 14,
+        player_name: "Paula",
+        shot_type: "Volley",
+        level: "Intermediate",
+        how_to_do:
+          "Keep the racket head above the wrist and use a slightly open face to create a controlled slice volley that stays low."
+      },
+
+      {
+        id: 15,
+        player_name: "Hugo",
+        shot_type: "Smash",
+        level: "Beginner",
+        how_to_do:
+          "Don't force a smash when you're too far from the net. If the lob pushes you back, choose a bandeja and keep your net position instead."
+      },
+
+      {
+        id: 16,
+        player_name: "Zoe",
+        shot_type: "Bandeja",
+        level: "Advanced",
+        how_to_do:
+          "Change your direction and pace. A bandeja into the corner near the side glass often creates more pressure than simply hitting harder."
+      },
+
+      {
+        id: 17,
+        player_name: "Diego",
+        shot_type: "Vibora",
+        level: "Advanced",
+        how_to_do:
+          "Use an early shoulder turn and contact slightly to the side of your head so you can brush across the ball and create stronger side spin."
+      },
+
+      {
+        id: 18,
+        player_name: "Clara",
+        shot_type: "Rulo",
+        level: "Intermediate",
+        how_to_do:
+          "Keep the preparation relaxed and accelerate through the outside of the ball to produce topspin without overhitting."
+      },
+
+      {
+        id: 19,
+        player_name: "Oscar",
+        shot_type: "Glass",
+        level: "Beginner",
+        how_to_do:
+          "Stay patient. Give the ball enough room to rebound from the glass instead of rushing toward it before you know where it will come out."
+      },
+
+      {
+        id: 20,
+        player_name: "Nina",
+        shot_type: "Volley",
+        level: "Intermediate",
+        how_to_do:
+          "Use a softer volley toward the opponents' feet when they're moving forward. Making them contact below net height can create an easier next ball."
+      }
+
+    ];
+
+
+    /* =========================
+       LOCAL STORAGE
+       ========================= */
+
+    const STORAGE_KEY = "padelPilotCommunityTips";
+
+    let tipsData = loadTips();
+
+
+    function loadTips() {
+
+      const saved = localStorage.getItem(STORAGE_KEY);
+
+      if (!saved) {
+        return [...startingTips];
+      }
+
+      try {
+        return JSON.parse(saved);
+      }
+
+      catch (error) {
+        return [...startingTips];
+      }
+
+    }
+
+
+    function saveTips() {
+
+      localStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify(tipsData)
+      );
+
+    }
+
+
+    /* =========================
+       VIEWS
+       ========================= */
+
+    function switchView(viewName) {
+
+      document
+        .querySelectorAll(".view")
+        .forEach(view => {
+          view.classList.remove("active");
+        });
+
+
+      document
+        .querySelectorAll(".tab-btn")
+        .forEach(button => {
+          button.classList.remove("active");
+        });
+
+
+      if (viewName === "browse") {
+
+        document
+          .getElementById("browse-view")
+          .classList.add("active");
+
+        document
+          .querySelectorAll(".tab-btn")[0]
+          .classList.add("active");
+
+        renderTips();
+
+      }
+
+      else {
+
+        document
+          .getElementById("add-view")
+          .classList.add("active");
+
+        document
+          .querySelectorAll(".tab-btn")[1]
+          .classList.add("active");
+
+      }
+
+    }
+
+
+    /* =========================
+       RENDER TIPS
+       ========================= */
+
+    function renderTips() {
+
+      const container =
+        document.getElementById("tip-list-container");
+
+      const shotFilter =
+        document.getElementById("filter-shot").value;
+
+      const levelFilter =
+        document.getElementById("filter-level").value;
+
+      const search =
+        document
+          .getElementById("search-input")
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      document.getElementById("total-count").textContent =
+        tipsData.length;
+
+      document.getElementById("hero-count").textContent =
+        tipsData.length;
+
+
+      const filtered =
+        tipsData.filter(tip => {
+
+          const matchesShot =
+            shotFilter === "All" ||
+            tip.shot_type === shotFilter;
+
+
+          const matchesLevel =
+            levelFilter === "All" ||
+            tip.level === levelFilter;
+
+
+          const searchableText =
+            (
+              tip.player_name +
+              " " +
+              tip.shot_type +
+              " " +
+              tip.level +
+              " " +
+              tip.how_to_do
+            ).toLowerCase();
+
+
+          const matchesSearch =
+            !search ||
+            searchableText.includes(search);
+
+
+          return (
+            matchesShot &&
+            matchesLevel &&
+            matchesSearch
+          );
+
+        });
+
+
+      if (filtered.length === 0) {
+
+        container.innerHTML = `
+
+          <div class="empty-state">
+
+            <span>
+              🎾
+            </span>
+
+            No tips match those filters.
+
+          </div>
+
+        `;
+
+        return;
+
+      }
+
+
+      container.innerHTML =
+        filtered.map((tip, index) => `
+
+          <article class="tip-card">
+
+            <div class="tip-top">
+
+              <div class="tip-tags">
+
+                <span class="badge badge-shot">
+                  ${escapeHtml(tip.shot_type)}
+                </span>
+
+                <span class="badge badge-level">
+                  ${escapeHtml(tip.level)}
+                </span>
+
+              </div>
+
+              <span class="tip-number">
+                #${String(index + 1).padStart(2, "0")}
+              </span>
+
+            </div>
+
+
+            <div class="tip-content">
+
+              ${escapeHtml(tip.how_to_do)}
+
+            </div>
+
+
+            <div class="tip-footer">
+
+              <div class="tip-author">
+
+                Shared by
+                <strong>
+                  ${escapeHtml(tip.player_name)}
+                </strong>
+
+              </div>
+
+            </div>
+
+          </article>
+
+        `).join("");
+
+    }
+
+
+    /* =========================
+       ADD TIP
+       ========================= */
+
+    function handleFormSubmit(event) {
+
+      event.preventDefault();
+
+
+      const alertBox =
+        document.getElementById("form-alert");
+
+      const successBox =
+        document.getElementById("form-success");
+
+
+      alertBox.style.display = "none";
+
+      successBox.style.display = "none";
+
+
+      const playerName =
+        document
+          .getElementById("player_name")
+          .value
+          .trim();
+
+
+      const shotType =
+        document
+          .getElementById("shot_type")
+          .value;
+
+
+      const level =
+        document
+          .getElementById("level")
+          .value;
+
+
+      const howToDo =
+        document
+          .getElementById("how_to_do")
+          .value
+          .trim();
+
+
+      if (
+        !playerName ||
+        !shotType ||
+        !level ||
+        !howToDo
+      ) {
+
+        alertBox.style.display = "block";
+
+        return;
+
+      }
+
+
+      const newTip = {
+
+        id: Date.now(),
+
+        player_name: playerName,
+
+        shot_type: shotType,
+
+        level: level,
+
+        how_to_do: howToDo
+
+      };
+
+
+      tipsData.unshift(newTip);
+
+
+      saveTips();
+
+
+      document
+        .getElementById("tip-form")
+        .reset();
+
+
+      updateCharacterCount();
+
+
+      successBox.style.display = "block";
+
+
+      setTimeout(() => {
+
+        successBox.style.display = "none";
+
+        switchView("browse");
+
+      }, 700);
+
+    }
+
+
+    /* =========================
+       CHARACTER COUNT
+       ========================= */
+
+    function updateCharacterCount() {
+
+      const textarea =
+        document.getElementById("how_to_do");
+
+      document
+        .getElementById("character-count")
+        .textContent =
+        textarea.value.length;
+
+    }
+
+
+    /* =========================
+       SECURITY
+       ========================= */
+
+    function escapeHtml(value) {
+
+      return String(value).replace(
+        /[&<>"']/g,
+        function(character) {
+
+          return {
+
+            "&": "&amp;",
+
+            "<": "&lt;",
+
+            ">": "&gt;",
+
+            '"': "&quot;",
+
+            "'": "&#039;"
+
+          }[character];
+
+        }
+      );
+
+    }
+
+
+    /* =========================
+       START APP
+       ========================= */
+
+    renderTips();
+
+  </script>
+
+</body>
+
+</html>
