@@ -1333,6 +1333,11 @@
     const SUPABASE_URL = "https://latnuowahnmvkiwobnwy.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxhdG51b3dhaG5tdmtpd29ibnd5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk2MTg1NzEsImV4cCI6MjEwNTE5NDU3MX0.aCIySQjoKE7u6jGfzNLtU_1fd5mmqvy9lh4EQhDEXTk";
 
+const supabaseHeaders = {
+  "apikey": SUPABASE_KEY,
+  "Authorization": `Bearer ${SUPABASE_KEY}`,
+  "Content-Type": "application/json"
+};
     /* =========================
        STARTING DATA
        ========================= */
@@ -1528,36 +1533,54 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
     const STORAGE_KEY = "padelPilotCommunityTips";
 
-    let tipsData = loadTips();
+    let tipsData = [];
 
 
-    function loadTips() {
-
-      const saved = localStorage.getItem(STORAGE_KEY);
-
-      if (!saved) {
-        return [...startingTips];
+    async function loadTips() {
+  try {
+    const response = await fetch(
+      `${SUPABASE_URL}/rest/v1/community_tips?select=*&order=id.desc`,
+      {
+        headers: supabaseHeaders
       }
+    );
 
-      try {
-        return JSON.parse(saved);
-      }
-
-      catch (error) {
-        return [...startingTips];
-      }
-
+    if (!response.ok) {
+      throw new Error("Could not load tips");
     }
 
+    const data = await response.json();
 
-    function saveTips() {
-
-      localStorage.setItem(
-        STORAGE_KEY,
-        JSON.stringify(tipsData)
-      );
-
+    if (data.length === 0) {
+      return [...startingTips];
     }
+
+    return data;
+  } catch (error) {
+    console.error(error);
+    return [...startingTips];
+  }
+}
+
+async function saveTipToSupabase(tip) {
+  const response = await fetch(
+    `${SUPABASE_URL}/rest/v1/community_tips`,
+    {
+      method: "POST",
+      headers: {
+        ...supabaseHeaders,
+        "Prefer": "return=representation"
+      },
+      body: JSON.stringify(tip)
+    }
+  );
+
+  if (!response.ok) {
+    throw new Error("Could not save tip");
+  }
+
+  return await response.json();
+}
 
 
     /* =========================
@@ -1756,7 +1779,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
        ADD TIP
        ========================= */
 
-    function handleFormSubmit(event) {
+    async function handleFormSubmit(event) {
 
       event.preventDefault();
 
@@ -1831,7 +1854,7 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
       tipsData.unshift(newTip);
 
 
-      saveTips();
+      await saveTipToSupabase(newTip);
 
 
       document
@@ -1907,7 +1930,12 @@ const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
        START APP
        ========================= */
 
-    renderTips();
+    async function startApp() {
+  tipsData = await loadTips();
+  renderTips();
+}
+
+startApp();
 
   </script>
 
