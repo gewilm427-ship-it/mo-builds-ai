@@ -1,154 +1,2068 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ApplyPilot</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ApplyPilot — College Application Planner</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #f7f8fc;
-      color: #111827;
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .page {
-      width: 100%;
-      max-width: 440px;
-      padding: 30px 20px;
-    }
-
-    .logo {
-      text-align: center;
-      font-size: 36px;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .tagline {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 35px;
-    }
-
-    .card {
-      background: white;
-      padding: 32px;
-      border-radius: 18px;
-      box-shadow: 0 10px 35px rgba(0, 0, 0, 0.07);
-    }
-
-    h2 {
-      font-size: 22px;
-      margin-bottom: 22px;
-    }
-
-    label {
-      display: block;
-      font-size: 14px;
-      font-weight: 600;
-      margin-bottom: 7px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px 14px;
-      margin-bottom: 18px;
-      border: 1px solid #d1d5db;
-      border-radius: 9px;
-      font-size: 16px;
-      outline: none;
-    }
-
-    input:focus {
-      border-color: #2563eb;
-    }
-
-    button {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 9px;
-      font-size: 16px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    #signUpButton {
-      background: #2563eb;
-      color: white;
-    }
-
-    .divider {
-      text-align: center;
-      color: #9ca3af;
-      margin: 22px 0;
-      font-size: 14px;
-    }
-
-    #signInButton {
-      background: white;
-      color: #111827;
-      border: 1px solid #d1d5db;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 24px;
-      color: #9ca3af;
-      font-size: 13px;
-    }
-  </style>
+<style>
+:root{
+  --blue:#405de6;
+  --dark:#17243d;
+  --muted:#6d7b92;
+  --bg:#f5f7fc;
+  --border:#e0e6f0;
+  --green:#178365;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--dark);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+button:disabled{opacity:.6;cursor:not-allowed}
+h1{font-size:29px;margin:0 0 10px}
+h2{font-size:21px;margin:0 0 12px}
+h3{font-size:17px;margin:0 0 12px}
+p{line-height:1.6}
+a{color:var(--blue);overflow-wrap:anywhere}
+.hidden{display:none!important}
+.muted,.small{color:var(--muted)}
+.small{font-size:13px}
+.card{
+  background:white;
+  border:1px solid var(--border);
+  border-radius:17px;
+  padding:22px;
+  margin-bottom:17px;
+}
+.btn{
+  border:0;
+  background:var(--blue);
+  color:white;
+  padding:11px 16px;
+  border-radius:10px;
+  font-weight:700;
+}
+.btn.secondary{background:#eaf0ff;color:var(--blue)}
+.btn.outline{background:white;color:var(--dark);border:1px solid var(--border)}
+.btn.danger{background:#ffeff0;color:#bd4350}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.between{justify-content:space-between}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.stat{font-size:32px;font-weight:800}
+label{display:block;font-size:14px;font-weight:650;margin:15px 0 7px}
+input:not([type=checkbox]),textarea,select{
+  width:100%;
+  display:block;
+  padding:12px;
+  background:white;
+  border:1px solid #d5ddec;
+  border-radius:10px;
+  color:var(--dark);
+}
+textarea{min-height:110px;resize:vertical;line-height:1.6}
+.notice{
+  padding:14px;
+  border-radius:11px;
+  background:#eef3ff;
+  color:#435984;
+  font-size:13px;
+  line-height:1.6;
+  margin:14px 0;
+}
+.success{background:#ebf8f3;color:#176d56}
+.feedback{
+  white-space:pre-wrap;
+  line-height:1.7;
+  background:#f0f3ff;
+  border:1px solid #dbe3ff;
+  padding:16px;
+  border-radius:12px;
+  margin-top:14px;
+}
+.check{
+  display:flex;
+  align-items:flex-start;
+  gap:10px;
+  font-size:14px;
+  font-weight:500;
+  margin:11px 0;
+}
+.check input{width:auto;margin-top:3px}
+.pill{
+  display:inline-block;
+  background:#edf1ff;
+  color:var(--blue);
+  border-radius:25px;
+  padding:5px 10px;
+  font-size:12px;
+}
+.logo{
+  width:43px;height:43px;
+  display:grid;place-items:center;
+  border-radius:13px;
+  background:var(--blue);
+  color:white;
+  font-size:24px;
+  font-weight:900;
+}
+#authPage{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:20px;
+}
+.authWrap{width:100%;max-width:430px}
+.authBrand{text-align:center;margin-bottom:22px}
+.authBrand .logo{margin:auto}
+#appPage{display:flex;min-height:100vh}
+.sidebar{
+  width:245px;
+  flex-shrink:0;
+  background:white;
+  border-right:1px solid var(--border);
+  padding:22px 13px;
+  display:flex;
+  flex-direction:column;
+}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:22px;
+  font-weight:800;
+  padding:0 9px 26px;
+}
+nav{display:grid;gap:5px}
+nav button{
+  border:0;
+  background:transparent;
+  padding:13px;
+  border-radius:10px;
+  text-align:left;
+  color:#6c7c95;
+  font-weight:650;
+}
+nav button.active,nav button:hover{
+  background:#edf1ff;
+  color:var(--blue);
+}
+.sidebarBottom{margin-top:auto;padding:18px 9px 0;overflow-wrap:anywhere}
+.main{
+  width:100%;
+  max-width:1250px;
+  min-width:0;
+  margin:auto;
+  padding:35px clamp(17px,4vw,50px);
+}
+.section{display:none}
+.section.active{display:block}
+.hero{
+  background:linear-gradient(115deg,#3047b7,#697ff1);
+  color:white;
+  padding:33px;
+  border-radius:20px;
+  margin:18px 0;
+}
+.hero p{color:#e8ecff}
+.hero .btn{background:white;color:var(--blue)}
+.pageHead{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:18px;
+}
+.searchResults{
+  max-height:330px;
+  overflow:auto;
+  border:1px solid var(--border);
+  border-radius:10px;
+  margin-top:10px;
+}
+.searchResult{
+  width:100%;
+  display:block;
+  text-align:left;
+  padding:13px;
+  background:white;
+  border:0;
+  border-bottom:1px solid var(--border);
+}
+.searchResult:hover{background:#f0f3ff}
+.requirement{
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:11px 13px;
+  margin:8px 0;
+}
+.requirement .check{margin:0}
+.progress{
+  height:8px;
+  background:#e9edf6;
+  border-radius:20px;
+  overflow:hidden;
+}
+.progressFill{height:100%;background:var(--blue);width:0}
+@media(max-width:800px){
+  #appPage{display:block}
+  .sidebar{width:100%;padding:12px}
+  .brand{padding-bottom:12px}
+  nav{display:flex;overflow-x:auto}
+  nav button{white-space:nowrap}
+  .sidebarBottom{margin-top:8px}
+  .main{padding:22px 15px}
+  .grid,.stats{grid-template-columns:1fr}
+  .hero{padding:23px}
+}
+</style>
 </head>
 
 <body>
 
-  <main class="page">
+<!-- AUTHENTICATION -->
 
-    <div class="logo">ApplyPilot</div>
-    <p class="tagline">Your university application workspace.</p>
-
-    <div class="card">
-
-      <h2>Create your account</h2>
-
-      <label for="email">Email</label>
-      <input
-        type="email"
-        id="email"
-        placeholder="you@example.com"
-      >
-
-      <label for="password">Password</label>
-      <input
-        type="password"
-        id="password"
-        placeholder="Enter your password"
-      >
-
-      <button id="signUpButton">Create account</button>
-
-      <div class="divider">Already have an account?</div>
-
-      <button id="signInButton">Sign in</button>
-
+<div id="authPage">
+  <div class="authWrap">
+    <div class="authBrand">
+      <div class="logo">A</div>
+      <h1 style="margin-top:13px">ApplyPilot</h1>
+      <p class="muted">Your future, organized.</p>
     </div>
 
-    <p class="footer">
-      Your application data stays private to your account.
+    <div class="card">
+      <h2 id="authTitle">Welcome back</h2>
+      <p class="muted">Sign in to manage your applications.</p>
+
+      <button id="githubLogin" class="btn"
+        style="width:100%;background:#242936">
+        Continue with GitHub
+      </button>
+
+      <p class="small" style="text-align:center;margin:19px 0">
+        — or use email —
+      </p>
+
+      <form id="authForm">
+        <label>Email</label>
+        <input id="email" type="email" required autocomplete="email">
+
+        <label>Password</label>
+        <input id="password" type="password" minlength="6" required>
+
+        <button id="authSubmit" class="btn"
+          style="width:100%;margin-top:20px">
+          Sign in
+        </button>
+      </form>
+
+      <button id="switchAuth" class="btn outline"
+        style="width:100%;margin-top:11px">
+        Create an account instead
+      </button>
+
+      <p id="authMessage" class="small" role="status"></p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+
+<div id="appPage" class="hidden">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="logo">A</span>
+      ApplyPilot
+    </div>
+
+    <nav>
+      <button class="active" data-page="dashboard">◫ Dashboard</button>
+      <button data-page="colleges">▤ My Colleges</button>
+      <button data-page="activities">✦ Activities</button>
+      <button data-page="essay">✎ Personal Essay</button>
+      <button data-page="review">✓ Application Review</button>
+      <button data-page="profile">⚙ Profile</button>
+    </nav>
+
+    <div class="sidebarBottom">
+      <p id="accountEmail" class="small"></p>
+      <p id="cloudStatus" class="small">Cloud: connecting...</p>
+      <button id="signOut" class="btn outline">Sign out</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <!-- DASHBOARD -->
+
+    <section id="dashboard" class="section active">
+      <p class="small">YOUR APPLICATION WORKSPACE</p>
+
+      <div class="hero">
+        <h1 id="welcome">Welcome back!</h1>
+        <p>
+          Explore universities, see admissions requirements,
+          track deadlines, and build stronger applications.
+        </p>
+        <button class="btn" data-go="colleges">
+          Explore colleges →
+        </button>
+      </div>
+
+      <div class="stats">
+        <div class="card">
+          <p class="muted">My colleges</p>
+          <div class="stat" id="statColleges">0</div>
+        </div>
+        <div class="card">
+          <p class="muted">Activities</p>
+          <div class="stat" id="statActivities">0</div>
+        </div>
+        <div class="card">
+          <p class="muted">Progress</p>
+          <div class="stat" id="statProgress">0%</div>
+          <div class="progress">
+            <div class="progressFill" id="progressFill"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="card">
+          <h3>Upcoming deadlines</h3>
+          <div id="upcomingDeadlines"></div>
+        </div>
+        <div class="card">
+          <h3>Your next steps</h3>
+          <div id="nextSteps"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLLEGES -->
+
+    <section id="colleges" class="section">
+
+      <div class="pageHead">
+        <div>
+          <h1>My Colleges</h1>
+          <p class="muted">
+            Search universities and automatically load available
+            admissions information.
+          </p>
+        </div>
+        <button id="addCollege" class="btn">+ Add Manually</button>
+      </div>
+
+      <div class="card">
+        <h3>Find a university</h3>
+
+        <input id="collegeSearch"
+          placeholder="Try a and m, u of h, Harvard, NYU..."
+          autocomplete="off">
+
+        <p id="searchStatus" class="small">
+          Type at least 2 characters.
+        </p>
+
+        <div id="searchResults" class="searchResults hidden"></div>
+
+        <div class="notice">
+          Selecting a university automatically fills in its
+          available admissions website and requirements.
+          Verified profiles have university-specific information;
+          other schools use a checklist of requirements to confirm.
+        </div>
+      </div>
+
+      <div id="collegeEditor" class="card hidden">
+        <h2 id="collegeEditorTitle">Add College</h2>
+
+        <label>University</label>
+        <input id="collegeName">
+
+        <label>Application deadline</label>
+        <input id="collegeDeadline" type="date">
+
+        <label>Application status</label>
+        <select id="collegeStatus">
+          <option>Researching</option>
+          <option>Planning to apply</option>
+          <option>In progress</option>
+          <option>Submitted</option>
+          <option>Decision received</option>
+        </select>
+
+        <div id="collegeInfo" class="notice"></div>
+
+        <h3>Admissions website</h3>
+        <div id="collegeWebsiteBox"></div>
+
+        <h3 style="margin-top:23px">Application requirements</h3>
+        <div id="editorRequirements"></div>
+
+        <label>Supplemental essays and notes</label>
+        <textarea id="collegeNotes"
+          placeholder="Essay prompts, scholarships, reminders..."></textarea>
+
+        <div class="row">
+          <button id="saveCollege" class="btn">Save College</button>
+          <button id="cancelCollege" class="btn outline">Cancel</button>
+        </div>
+      </div>
+
+      <div id="collegeList"></div>
+
+      <div class="card">
+        <h3>✦ Ask ApplyPilot AI — Colleges</h3>
+        <textarea id="collegeQuestion"
+          placeholder="What should I prepare for my college applications?"></textarea>
+
+        <div class="row">
+          <button class="btn" data-ai="colleges">Ask AI</button>
+          <button class="btn secondary" data-basic="colleges">
+            Basic Review
+          </button>
+        </div>
+
+        <div id="collegeAnswer" class="feedback hidden"></div>
+      </div>
+    </section>
+
+    <!-- ACTIVITIES -->
+
+    <section id="activities" class="section">
+      <div class="pageHead">
+        <div>
+          <h1>Activities</h1>
+          <p class="muted">
+            Show your leadership, involvement, and impact.
+          </p>
+        </div>
+        <button id="addActivity" class="btn">+ Add Activity</button>
+      </div>
+
+      <div id="activityEditor" class="card hidden">
+        <h3 id="activityEditorTitle">Add Activity</h3>
+
+        <label>Activity name</label>
+        <input id="activityName" placeholder="Student Council">
+
+        <label>Your role</label>
+        <input id="activityRole" placeholder="President">
+
+        <label>Description</label>
+        <textarea id="activityDescription"
+          placeholder="What did you do and what impact did you have?"></textarea>
+
+        <div class="row">
+          <button id="saveActivity" class="btn">Save Activity</button>
+          <button id="cancelActivity" class="btn outline">Cancel</button>
+        </div>
+      </div>
+
+      <div id="activityList"></div>
+
+      <div class="card">
+        <h3>✦ Ask ApplyPilot AI — Activities</h3>
+        <textarea id="activityQuestion"
+          placeholder="How can I improve my activities list?"></textarea>
+
+        <div class="row">
+          <button class="btn" data-ai="activities">Ask AI</button>
+          <button class="btn secondary" data-basic="activities">
+            Basic Review
+          </button>
+        </div>
+
+        <div id="activityAnswer" class="feedback hidden"></div>
+      </div>
+    </section>
+
+    <!-- ESSAY -->
+
+    <section id="essay" class="section">
+      <h1>Personal Essay</h1>
+      <p class="muted">Write your story. Your essay saves automatically.</p>
+
+      <div class="card">
+        <label>Essay prompt</label>
+        <textarea id="essayPrompt" style="min-height:90px"
+          placeholder="Paste your essay prompt..."></textarea>
+
+        <label>Your essay</label>
+        <textarea id="essayText" style="min-height:350px"
+          placeholder="Start writing..."></textarea>
+
+        <div class="row between">
+          <span id="wordCount" class="small">0 words</span>
+          <span id="saveStatus" class="small">Ready</span>
+        </div>
+
+        <button id="saveEssay" class="btn" style="margin-top:15px">
+          Save Now
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>✦ Ask ApplyPilot AI — Essay</h3>
+
+        <textarea id="essayQuestion"
+          placeholder="How can I make my introduction stronger?"></textarea>
+
+        <div class="row">
+          <button class="btn" data-ai="essay">Ask AI</button>
+          <button class="btn secondary" data-basic="essay">
+            Basic Review
+          </button>
+        </div>
+
+        <div id="essayAnswer" class="feedback hidden"></div>
+      </div>
+    </section>
+
+    <!-- REVIEW -->
+
+    <section id="review" class="section">
+      <h1>Application Review</h1>
+      <p class="muted">See what's ready and what's missing.</p>
+
+      <div class="card">
+        <h3>Readiness checklist</h3>
+        <div id="readiness"></div>
+      </div>
+
+      <div class="card">
+        <h3>✦ Ask ApplyPilot AI — Full Application</h3>
+
+        <textarea id="reviewQuestion"
+          placeholder="What should I focus on improving?"></textarea>
+
+        <div class="row">
+          <button class="btn" data-ai="review">Ask AI</button>
+          <button class="btn secondary" data-basic="review">
+            Basic Review
+          </button>
+        </div>
+
+        <div id="reviewAnswer" class="feedback hidden"></div>
+      </div>
+    </section>
+
+    <!-- PROFILE -->
+
+    <section id="profile" class="section">
+      <h1>Your Profile</h1>
+
+      <div class="card">
+        <label>Preferred name</label>
+        <input id="profileName" placeholder="Your name">
+
+        <button id="saveProfile" class="btn" style="margin-top:16px">
+          Save Name
+        </button>
+      </div>
+
+      <div class="card">
+        <h3>Account</h3>
+        <p id="profileEmail"></p>
+        <p id="profileCloudStatus" class="small"></p>
+      </div>
+    </section>
+
+    <p class="small" style="margin-top:35px">
+      ApplyPilot is an application organizer, not an official admissions
+      service. Always confirm requirements and deadlines with the university.
     </p>
-
   </main>
+</div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+/* ======================================================
+   PUT YOUR SUPABASE DETAILS HERE
+   ====================================================== */
+
+const SUPABASE_URL = "https://kfnykqknnewusttxltzd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_uHTdcLU3gcBg-APDq_iUNA_0hK0zpxr";
+
+/* ======================================================
+   SUPABASE
+   ====================================================== */
+
+const db = supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+
+const $ = id => document.getElementById(id);
+
+function escapeHTML(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#39;");
+}
+
+function norm(value){
+  return String(value || "")
+    .toLowerCase()
+    .replaceAll("&"," and ")
+    .replace(/[^a-z0-9 ]/g," ")
+    .replace(/\s+/g," ")
+    .trim();
+}
+
+function id(){
+  return crypto.randomUUID();
+}
+
+function blankData(){
+  return {
+    name:"",
+    colleges:[],
+    activities:[],
+    essay:"",
+    prompt:""
+  };
+}
+
+let user = null;
+let data = blankData();
+let ready = false;
+let authMode = "signin";
+let editingCollege = null;
+let editingActivity = null;
+let saveTimer = null;
+let searchTimer = null;
+let searchVersion = 0;
+let loadVersion = 0;
+let changeVersion = 0;
+let savedVersion = 0;
+let saving = false;
+
+/* ======================================================
+   UNIVERSITY ADMISSIONS DATABASE
+
+   "verified" means the starter information was taken
+   from an official admissions page, NOT that it covers
+   every program or every applicant type.
+
+   Other schools get a verification checklist.
+   ====================================================== */
+
+const GENERAL_CHECKLIST = [
+  "Application form and submission platform",
+  "Application fee or fee waiver",
+  "High school transcript or academic record",
+  "Personal essay or statement",
+  "Supplemental essays, if required",
+  "Activities list or résumé, if required",
+  "Recommendation letters, if required",
+  "SAT/ACT policy for your application year",
+  "English proficiency policy, if applicable",
+  "Program-specific requirements",
+  "Scholarship and financial aid documents"
+];
+
+const SCHOOL_PROFILES = [
+  {
+    name:"Texas A&M University",
+    state:"Texas",
+    aliases:["a and m","a&m","tamu","texas am","texas a and m"],
+    website:"https://www.tamu.edu/admissions/how-to-apply/apply-as-freshman.html",
+    verified:true,
+    requirements:[
+      "Freshman application (Common App or ApplyTexas)",
+      "Application fee or approved fee waiver",
+      "Required application essay",
+      "Self-reported Transcript and Academic Record (STARS), when applicable",
+      "Official transcript or other academic documents, when required",
+      "Residency or international applicant documents, when applicable",
+      "SAT/ACT scores: optional under the published freshman policy",
+      "Program-specific or campus-specific requirements"
+    ],
+    note:"Freshman admissions information. Some materials and deadlines differ by campus, term, residency and program."
+  },
+  {
+    name:"University of Houston",
+    state:"Texas",
+    aliases:["u of h","uh","uoh"],
+    website:"https://www.uh.edu/undergraduate-admissions/apply/incoming-freshman/index.php",
+    verified:true,
+    requirements:[
+      "Freshman application (Common App or ApplyTexas)",
+      "Application fee or fee waiver",
+      "Self-reported academic grades or required academic record",
+      "Admissions essay",
+      "Activities list or résumé",
+      "SAT/ACT: choose the appropriate testing pathway",
+      "Additional documents for international applicants, if applicable",
+      "Additional requirements for selected majors"
+    ],
+    note:"University of Houston has distinct requirements for international applicants and some majors. Confirm the current term's testing and academic criteria."
+  },
+  {
+    name:"Harvard University",
+    state:"Massachusetts",
+    aliases:["harvard","harvard college"],
+    website:"https://college.harvard.edu/admissions/apply/first-year-applicants",
+    verified:true,
+    requirements:[
+      "Common Application",
+      "Common Application personal essay",
+      "Activities list",
+      "Harvard supplemental short-answer questions",
+      "Application fee or fee waiver",
+      "SAT or ACT, subject to Harvard's published exceptions",
+      "High school transcript and school report",
+      "Counselor recommendation",
+      "Two teacher recommendations",
+      "Midyear school report",
+      "Final school report if admitted"
+    ],
+    note:"Harvard's first-year requirements apply to domestic and international candidates, with specific standardized-testing exceptions."
+  }
+];
+
+/*
+   Extra schools have name and abbreviation search.
+   Their admissions requirements are NOT marked verified.
+*/
+
+const EXTRA_SCHOOLS = [
+  ["University of Texas at Austin","Texas",["ut austin","ut"]],
+  ["University of Texas at Dallas","Texas",["utd"]],
+  ["University of Texas at Arlington","Texas",["uta"]],
+  ["University of Texas at San Antonio","Texas",["utsa"]],
+  ["Texas Tech University","Texas",["ttu"]],
+  ["Texas State University","Texas",["txst"]],
+  ["University of North Texas","Texas",["unt"]],
+  ["Rice University","Texas",["rice"]],
+  ["Baylor University","Texas",["baylor"]],
+  ["Southern Methodist University","Texas",["smu"]],
+  ["Stanford University","California",["stanford"]],
+  ["University of California, Berkeley","California",["berkeley","cal"]],
+  ["University of California, Los Angeles","California",["ucla"]],
+  ["University of California, San Diego","California",["ucsd"]],
+  ["University of California, Irvine","California",["uci"]],
+  ["University of California, Davis","California",["uc davis"]],
+  ["University of California, Santa Barbara","California",["ucsb"]],
+  ["University of Southern California","California",["usc"]],
+  ["New York University","New York",["nyu"]],
+  ["Columbia University","New York",["columbia"]],
+  ["Cornell University","New York",["cornell"]],
+  ["Yale University","Connecticut",["yale"]],
+  ["Princeton University","New Jersey",["princeton"]],
+  ["Massachusetts Institute of Technology","Massachusetts",["mit"]],
+  ["Boston University","Massachusetts",["bu"]],
+  ["Boston College","Massachusetts",["bc"]],
+  ["Northeastern University","Massachusetts",["northeastern"]],
+  ["Tufts University","Massachusetts",["tufts"]],
+  ["University of Pennsylvania","Pennsylvania",["upenn","penn"]],
+  ["Pennsylvania State University","Pennsylvania",["penn state","psu"]],
+  ["Carnegie Mellon University","Pennsylvania",["cmu"]],
+  ["University of Pittsburgh","Pennsylvania",["pitt"]],
+  ["Duke University","North Carolina",["duke"]],
+  ["University of North Carolina at Chapel Hill","North Carolina",["unc"]],
+  ["North Carolina State University","North Carolina",["nc state","ncsu"]],
+  ["Johns Hopkins University","Maryland",["jhu"]],
+  ["University of Maryland, College Park","Maryland",["umd"]],
+  ["Georgetown University","Washington DC",["georgetown"]],
+  ["George Washington University","Washington DC",["gwu"]],
+  ["University of Chicago","Illinois",["uchicago"]],
+  ["Northwestern University","Illinois",["northwestern"]],
+  ["University of Illinois Urbana-Champaign","Illinois",["uiuc"]],
+  ["University of Michigan","Michigan",["umich"]],
+  ["Michigan State University","Michigan",["msu"]],
+  ["Ohio State University","Ohio",["osu"]],
+  ["Case Western Reserve University","Ohio",["cwru"]],
+  ["Purdue University","Indiana",["purdue"]],
+  ["Indiana University Bloomington","Indiana",["iu"]],
+  ["University of Wisconsin-Madison","Wisconsin",["uw madison"]],
+  ["University of Minnesota Twin Cities","Minnesota",["umn"]],
+  ["University of Washington","Washington",["uw seattle","udub"]],
+  ["Washington State University","Washington",["wsu"]],
+  ["University of Oregon","Oregon",["uo"]],
+  ["Oregon State University","Oregon",["oregon state"]],
+  ["University of Florida","Florida",["uf"]],
+  ["Florida State University","Florida",["fsu"]],
+  ["University of Central Florida","Florida",["ucf"]],
+  ["University of Miami","Florida",["umiami"]],
+  ["University of South Florida","Florida",["usf"]],
+  ["Georgia Institute of Technology","Georgia",["georgia tech","gatech"]],
+  ["University of Georgia","Georgia",["uga"]],
+  ["Emory University","Georgia",["emory"]],
+  ["Vanderbilt University","Tennessee",["vandy"]],
+  ["University of Tennessee, Knoxville","Tennessee",["utk"]],
+  ["University of Alabama","Alabama",["bama"]],
+  ["Auburn University","Alabama",["auburn"]],
+  ["Louisiana State University","Louisiana",["lsu"]],
+  ["Tulane University","Louisiana",["tulane"]],
+  ["Arizona State University","Arizona",["asu"]],
+  ["University of Arizona","Arizona",["uarizona"]],
+  ["University of Colorado Boulder","Colorado",["cu boulder"]],
+  ["Colorado State University","Colorado",["csu"]],
+  ["University of Utah","Utah",["the u"]],
+  ["Brigham Young University","Utah",["byu"]],
+  ["University of Nevada, Las Vegas","Nevada",["unlv"]],
+  ["University of Oklahoma","Oklahoma",["ou"]],
+  ["Oklahoma State University","Oklahoma",["okstate"]],
+  ["University of Kansas","Kansas",["ku"]],
+  ["University of Missouri","Missouri",["mizzou"]],
+  ["Washington University in St. Louis","Missouri",["washu"]],
+  ["University of Iowa","Iowa",["uiowa"]],
+  ["Iowa State University","Iowa",["iastate"]],
+  ["University of Connecticut","Connecticut",["uconn"]],
+  ["Brown University","Rhode Island",["brown"]],
+  ["Dartmouth College","New Hampshire",["dartmouth"]],
+  ["University of Massachusetts Amherst","Massachusetts",["umass"]],
+  ["Syracuse University","New York",["syracuse"]],
+  ["University of Rochester","New York",["rochester"]],
+  ["Stony Brook University","New York",["stony brook"]]
+];
+
+const ALL_SCHOOLS = [
+  ...SCHOOL_PROFILES,
+  ...EXTRA_SCHOOLS.map(([name,state,aliases]) => ({
+    name,state,aliases,
+    website:"",
+    verified:false,
+    requirements:[...GENERAL_CHECKLIST],
+    note:"Checklist of possible requirements. Not verified for this university."
+  }))
+];
+
+function schoolMatch(query){
+  const q = norm(query);
+
+  return ALL_SCHOOLS.map(school => {
+    const terms = [
+      school.name,
+      ...(school.aliases || [])
+    ].map(norm);
+
+    let score = 0;
+
+    if(terms.some(t => t === q)) score = 100;
+    else if(terms.some(t => t.startsWith(q))) score = 70;
+    else if(terms.some(t => t.includes(q))) score = 40;
+
+    return {...school,score};
+  })
+  .filter(s => s.score > 0)
+  .sort((a,b) => b.score-a.score);
+}
+
+function findProfile(name){
+  return ALL_SCHOOLS.find(s => norm(s.name) === norm(name));
+}
+
+function validURL(value){
+  try{
+    const url = new URL(value);
+    return ["https:","http:"].includes(url.protocol);
+  }catch{
+    return false;
+  }
+}
+
+function safeLink(container,url,label){
+  container.innerHTML = "";
+
+  if(!validURL(url)){
+    container.textContent =
+      "Official admissions link not available yet.";
+    return;
+  }
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.textContent = label;
+  a.target = "_blank";
+  a.rel = "noopener noreferrer";
+  container.appendChild(a);
+}
+
+/* ======================================================
+   UNIVERSITY SEARCH
+
+   Built-in schools first, then public university directory.
+   Directory results can provide official university sites,
+   but NOT verified admissions-specific URLs.
+   ====================================================== */
+
+function renderSearchResults(schools,message){
+  const box = $("searchResults");
+  box.innerHTML = "";
+  $("searchStatus").textContent = message;
+
+  if(!schools.length){
+    box.classList.add("hidden");
+    return;
+  }
+
+  schools.slice(0,50).forEach(school => {
+    const button = document.createElement("button");
+    button.className = "searchResult";
+    button.type = "button";
+
+    const title = document.createElement("strong");
+    title.textContent = school.name;
+
+    const subtitle = document.createElement("div");
+    subtitle.className = "small";
+    subtitle.textContent =
+      (school.state || "United States") +
+      (school.verified ? " · Admissions profile available" : "");
+
+    button.append(title,subtitle);
+
+    button.onclick = () => {
+      openCollegeEditor(null,school);
+      $("collegeSearch").value = school.name;
+      box.classList.add("hidden");
+      $("searchStatus").textContent = school.name + " selected.";
+
+      $("collegeEditor").scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+    };
+
+    box.appendChild(button);
+  });
+
+  box.classList.remove("hidden");
+}
+
+async function searchOnline(query,version){
+  const local = schoolMatch(query);
+
+  renderSearchResults(
+    local,
+    local.length
+      ? "Showing matches. Searching additional universities..."
+      : "Searching university directory..."
+  );
+
+  try{
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(),5000);
+
+    let response;
+
+    try{
+      response = await fetch(
+        "https://universities.hipolabs.com/search" +
+        "?country=United%20States&name=" +
+        encodeURIComponent(query),
+        {signal:controller.signal}
+      );
+    }finally{
+      clearTimeout(timeout);
+    }
+
+    if(!response.ok) throw new Error("Directory unavailable");
+
+    const online = await response.json();
+
+    if(version !== searchVersion) return;
+
+    const results = [...local];
+    const seen = new Set(results.map(s => norm(s.name)));
+
+    online.forEach(entry => {
+      if(!entry.name) return;
+
+      const key = norm(entry.name);
+
+      if(seen.has(key)) return;
+      seen.add(key);
+
+      const website = (entry.web_pages || [])
+        .find(validURL) || "";
+
+      results.push({
+        name:entry.name,
+        state:entry["state-province"] || "United States",
+        aliases:[],
+        website,
+        verified:false,
+        requirements:[...GENERAL_CHECKLIST],
+        note:"Official university website from a public directory. Admissions-specific requirements are not verified."
+      });
+    });
+
+    renderSearchResults(
+      results,
+      results.length
+        ? results.length + " universities found."
+        : "No results. You can add a university manually."
+    );
+
+  }catch{
+    if(version !== searchVersion) return;
+
+    renderSearchResults(
+      local,
+      local.length
+        ? "Showing built-in results. Online directory unavailable."
+        : "Online search unavailable. Use Add Manually."
+    );
+  }
+}
+
+$("collegeSearch").oninput = () => {
+  clearTimeout(searchTimer);
+
+  const query = $("collegeSearch").value.trim();
+  const version = ++searchVersion;
+
+  if(query.length < 2){
+    $("searchResults").classList.add("hidden");
+    $("searchStatus").textContent = "Type at least 2 characters.";
+    return;
+  }
+
+  renderSearchResults(
+    schoolMatch(query),
+    "Showing built-in matches..."
+  );
+
+  searchTimer = setTimeout(
+    () => searchOnline(query,version),
+    350
+  );
+};
+
+/* ======================================================
+   CLOUD SAVING
+   ====================================================== */
+
+function cacheKey(){
+  return "applypilot-cloud-cache-" + user.id;
+}
+
+function cloudMessage(message){
+  $("cloudStatus").textContent = message;
+  $("profileCloudStatus").textContent = message;
+  $("saveStatus").textContent = message;
+}
+
+function localBackup(){
+  if(!user) return;
+
+  try{
+    localStorage.setItem(cacheKey(),JSON.stringify(data));
+  }catch(error){
+    console.warn("Local backup unavailable",error);
+  }
+}
+
+function readCache(){
+  try{
+    const raw = localStorage.getItem(cacheKey());
+    return raw ? JSON.parse(raw) : null;
+  }catch{
+    return null;
+  }
+}
+
+function markChanged(){
+  if(!ready || !user) return;
+
+  changeVersion++;
+  localBackup();
+  cloudMessage("Cloud: saving...");
+
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(saveCloud,650);
+}
+
+async function saveCloud(){
+  if(!ready || !user || saving) return;
+  if(changeVersion <= savedVersion) return;
+
+  saving = true;
+
+  const accountId = user.id;
+  const version = changeVersion;
+  const snapshot = JSON.parse(JSON.stringify(data));
+
+  const {error} = await db
+    .from("applypilot_data")
+    .upsert({
+      user_id:accountId,
+      content:snapshot,
+      updated_at:new Date().toISOString()
+    },{onConflict:"user_id"});
+
+  saving = false;
+
+  if(!user || user.id !== accountId) return;
+
+  if(error){
+    console.error(error);
+    cloudMessage("Cloud save failed — local backup kept");
+    return;
+  }
+
+  savedVersion = version;
+
+  if(changeVersion > savedVersion){
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveCloud,200);
+  }else{
+    cloudMessage("Cloud: saved ✓");
+  }
+}
+
+async function loadCloud(account){
+  const version = ++loadVersion;
+
+  ready = false;
+  data = blankData();
+  changeVersion = 0;
+  savedVersion = 0;
+
+  cloudMessage("Cloud: loading...");
+
+  const {data:record,error} = await db
+    .from("applypilot_data")
+    .select("content")
+    .eq("user_id",account.id)
+    .maybeSingle();
+
+  if(
+    version !== loadVersion ||
+    !user ||
+    user.id !== account.id
+  ) return;
+
+  $("authPage").classList.add("hidden");
+  $("appPage").classList.remove("hidden");
+
+  $("accountEmail").textContent = account.email || "";
+  $("profileEmail").textContent = account.email || "";
+
+  if(error){
+    console.error(error);
+    cloudMessage("Cloud unavailable — check Supabase SQL setup");
+    return;
+  }
+
+  const content = record?.content || readCache() || {};
+
+  data = {
+    ...blankData(),
+    ...content,
+    colleges:Array.isArray(content.colleges)
+      ? content.colleges : [],
+    activities:Array.isArray(content.activities)
+      ? content.activities : []
+  };
+
+  $("essayText").value = data.essay || "";
+  $("essayPrompt").value = data.prompt || "";
+  $("profileName").value = data.name || "";
+
+  ready = true;
+  cloudMessage("Cloud: connected ✓");
+
+  renderAll();
+  openPage("dashboard");
+  updateWordCount();
+
+  if(!record) markChanged();
+}
+
+/* ======================================================
+   AUTHENTICATION
+   ====================================================== */
+
+function showAuth(){
+  ++loadVersion;
+  ready = false;
+  user = null;
+
+  $("appPage").classList.add("hidden");
+  $("authPage").classList.remove("hidden");
+}
+
+async function showApp(account){
+  if(!account) return;
+  if(user?.id === account.id && ready) return;
+
+  user = account;
+  await loadCloud(account);
+}
+
+$("switchAuth").onclick = () => {
+  authMode = authMode === "signin" ? "signup" : "signin";
+
+  const signup = authMode === "signup";
+
+  $("authTitle").textContent =
+    signup ? "Create your account" : "Welcome back";
+
+  $("authSubmit").textContent =
+    signup ? "Create account" : "Sign in";
+
+  $("switchAuth").textContent =
+    signup ? "Sign in instead" : "Create an account instead";
+
+  $("authMessage").textContent = "";
+};
+
+$("authForm").onsubmit = async event => {
+  event.preventDefault();
+
+  const email = $("email").value.trim();
+  const password = $("password").value;
+
+  $("authSubmit").disabled = true;
+  $("authMessage").textContent = "";
+
+  try{
+    const result = authMode === "signup"
+      ? await db.auth.signUp({email,password})
+      : await db.auth.signInWithPassword({email,password});
+
+    if(result.error) throw result.error;
+
+    if(result.data.session){
+      await showApp(result.data.session.user);
+    }else{
+      $("authMessage").textContent =
+        "Check your email for a confirmation link if required.";
+    }
+  }catch(error){
+    $("authMessage").textContent = error.message;
+  }finally{
+    $("authSubmit").disabled = false;
+  }
+};
+
+$("githubLogin").onclick = async () => {
+  $("githubLogin").disabled = true;
+
+  const {error} = await db.auth.signInWithOAuth({
+    provider:"github",
+    options:{
+      redirectTo:location.origin + location.pathname
+    }
+  });
+
+  if(error){
+    $("authMessage").textContent = error.message;
+    $("githubLogin").disabled = false;
+  }
+};
+
+$("signOut").onclick = async () => {
+  if(ready){
+    data.essay = $("essayText").value;
+    data.prompt = $("essayPrompt").value;
+    localBackup();
+    await saveCloud();
+  }
+
+  const {error} = await db.auth.signOut();
+
+  if(error){
+    alert(error.message);
+    return;
+  }
+
+  showAuth();
+};
+
+db.auth.onAuthStateChange((event,session) => {
+  if(event === "SIGNED_OUT") showAuth();
+
+  if(event === "SIGNED_IN" && session){
+    setTimeout(() => showApp(session.user),0);
+  }
+});
+
+/* ======================================================
+   NAVIGATION
+   ====================================================== */
+
+function openPage(page){
+  document.querySelectorAll(".section").forEach(section => {
+    section.classList.toggle("active",section.id === page);
+  });
+
+  document.querySelectorAll("nav button").forEach(button => {
+    button.classList.toggle(
+      "active",
+      button.dataset.page === page
+    );
+  });
+
+  if(page === "review") renderReadiness();
+}
+
+document.querySelectorAll("[data-page],[data-go]")
+  .forEach(button => {
+    button.onclick = () => openPage(
+      button.dataset.page || button.dataset.go
+    );
+  });
+
+/* ======================================================
+   COLLEGE EDITOR — AUTOMATIC INFORMATION
+   ====================================================== */
+
+let editorSchool = null;
+let editorRequirements = [];
+let editorCompleted = [];
+
+function showEditorRequirements(){
+  const box = $("editorRequirements");
+  box.innerHTML = "";
+
+  if(!editorRequirements.length){
+    box.innerHTML =
+      '<p class="small">No requirements available.</p>';
+    return;
+  }
+
+  editorRequirements.forEach((requirement,index) => {
+    const label = document.createElement("label");
+    label.className = "check";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = editorCompleted.includes(requirement);
+
+    checkbox.onchange = () => {
+      editorCompleted = checkbox.checked
+        ? [...new Set([...editorCompleted,requirement])]
+        : editorCompleted.filter(r => r !== requirement);
+    };
+
+    const text = document.createElement("span");
+    text.textContent = requirement;
+
+    label.append(checkbox,text);
+    box.appendChild(label);
+  });
+}
+
+function showEditorInfo(){
+  const info = $("collegeInfo");
+
+  if(editorSchool.verified){
+    info.className = "notice success";
+    info.textContent =
+      "✓ Official-source starter profile. " +
+      editorSchool.note +
+      " Verify your application year and applicant type.";
+  }else{
+    info.className = "notice";
+    info.textContent =
+      "Requirements to verify — not a confirmed university-specific list. " +
+      (editorSchool.note || "");
+  }
+
+  safeLink(
+    $("collegeWebsiteBox"),
+    editorSchool.website,
+    editorSchool.verified
+      ? "Open official admissions requirements ↗"
+      : "Open official university website ↗"
+  );
+
+  showEditorRequirements();
+}
+
+function openCollegeEditor(collegeId=null,selectedSchool=null){
+  editingCollege = collegeId;
+
+  const existing = collegeId
+    ? data.colleges.find(c => c.id === collegeId)
+    : null;
+
+  if(existing){
+    editorSchool = {
+      name:existing.name,
+      website:existing.website || "",
+      verified:!!existing.verified,
+      note:existing.sourceNote || ""
+    };
+
+    editorRequirements = [...(existing.requirements || [])];
+    editorCompleted = [...(existing.completed || [])];
+
+  }else{
+    editorSchool = selectedSchool || {
+      name:"",
+      website:"",
+      verified:false,
+      note:"Add a university from search for automatic website lookup."
+    };
+
+    editorRequirements = [
+      ...(editorSchool.requirements || GENERAL_CHECKLIST)
+    ];
+
+    editorCompleted = [];
+  }
+
+  $("collegeEditorTitle").textContent =
+    existing ? "Edit College" : "Add College";
+
+  $("collegeName").value =
+    existing?.name || editorSchool.name || "";
+
+  $("collegeDeadline").value = existing?.deadline || "";
+  $("collegeStatus").value =
+    existing?.status || "Researching";
+
+  $("collegeNotes").value = existing?.notes || "";
+
+  showEditorInfo();
+
+  $("collegeEditor").classList.remove("hidden");
+}
+
+$("addCollege").onclick = () => {
+  openCollegeEditor();
+  $("collegeEditor").scrollIntoView({behavior:"smooth"});
+};
+
+$("cancelCollege").onclick = () => {
+  editingCollege = null;
+  $("collegeEditor").classList.add("hidden");
+};
+
+$("saveCollege").onclick = () => {
+  if(!ready) return;
+
+  const name = $("collegeName").value.trim();
+
+  if(!name){
+    alert("Enter a university name.");
+    return;
+  }
+
+  const values = {
+    name,
+    deadline:$("collegeDeadline").value,
+    status:$("collegeStatus").value,
+    notes:$("collegeNotes").value,
+    website:editorSchool.website || "",
+    verified:!!editorSchool.verified,
+    sourceNote:editorSchool.note || "",
+    requirements:[...editorRequirements],
+    completed:[...editorCompleted]
+  };
+
+  if(editingCollege){
+    const index = data.colleges.findIndex(
+      c => c.id === editingCollege
+    );
+
+    if(index >= 0){
+      data.colleges[index] = {
+        ...data.colleges[index],
+        ...values
+      };
+    }
+  }else{
+    data.colleges.push({
+      id:id(),
+      ...values
+    });
+  }
+
+  editingCollege = null;
+  $("collegeEditor").classList.add("hidden");
+
+  markChanged();
+  renderAll();
+};
+
+function renderColleges(){
+  const box = $("collegeList");
+  box.innerHTML = "";
+
+  if(!data.colleges.length){
+    box.innerHTML =
+      '<div class="card muted">No colleges added yet.</div>';
+    return;
+  }
+
+  data.colleges.forEach(college => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    const requirements = college.requirements || [];
+    const completed = college.completed || [];
+
+    card.innerHTML = `
+      <div class="row between">
+        <div>
+          <h3>${escapeHTML(college.name)}</h3>
+          <span class="pill">${escapeHTML(college.status)}</span>
+          <p class="small">
+            Deadline: ${escapeHTML(college.deadline || "Not set")}
+          </p>
+        </div>
+        <div class="row">
+          <button class="btn secondary edit">Edit</button>
+          <button class="btn danger remove">Remove</button>
+        </div>
+      </div>
+
+      <div class="notice ${college.verified ? "success" : ""}">
+        ${college.verified
+          ? "Official-source starter profile"
+          : "Requirements need university verification"}
+      </div>
+
+      <div class="website"></div>
+
+      <h3 style="margin-top:22px">
+        Requirements: ${completed.length}/${requirements.length}
+      </h3>
+
+      <div class="checks"></div>
+
+      <p>${escapeHTML(college.notes || "")}</p>
+      <p class="small">${escapeHTML(college.sourceNote || "")}</p>
+    `;
+
+    card.querySelector(".edit").onclick = () => {
+      openCollegeEditor(college.id);
+      $("collegeEditor").scrollIntoView({behavior:"smooth"});
+    };
+
+    card.querySelector(".remove").onclick = () => {
+      if(!confirm("Remove this college?")) return;
+
+      data.colleges = data.colleges.filter(
+        c => c.id !== college.id
+      );
+
+      markChanged();
+      renderAll();
+    };
+
+    safeLink(
+      card.querySelector(".website"),
+      college.website,
+      college.verified
+        ? "Official admissions page ↗"
+        : "University website ↗"
+    );
+
+    const checks = card.querySelector(".checks");
+
+    requirements.forEach(requirement => {
+      const label = document.createElement("label");
+      label.className = "check";
+
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.checked = completed.includes(requirement);
+
+      checkbox.onchange = () => {
+        const current = college.completed || [];
+
+        college.completed = checkbox.checked
+          ? [...new Set([...current,requirement])]
+          : current.filter(r => r !== requirement);
+
+        markChanged();
+        renderAll();
+      };
+
+      const text = document.createElement("span");
+      text.textContent = requirement;
+
+      label.append(checkbox,text);
+      checks.appendChild(label);
+    });
+
+    box.appendChild(card);
+  });
+}
+
+/* ======================================================
+   ACTIVITIES
+   ====================================================== */
+
+function openActivityEditor(activityId=null){
+  editingActivity = activityId;
+
+  const activity = activityId
+    ? data.activities.find(a => a.id === activityId)
+    : null;
+
+  $("activityEditorTitle").textContent =
+    activity ? "Edit Activity" : "Add Activity";
+
+  $("activityName").value = activity?.name || "";
+  $("activityRole").value = activity?.role || "";
+  $("activityDescription").value =
+    activity?.description || "";
+
+  $("activityEditor").classList.remove("hidden");
+}
+
+$("addActivity").onclick = () => {
+  openActivityEditor();
+  $("activityEditor").scrollIntoView({behavior:"smooth"});
+};
+
+$("cancelActivity").onclick = () => {
+  editingActivity = null;
+  $("activityEditor").classList.add("hidden");
+};
+
+$("saveActivity").onclick = () => {
+  if(!ready) return;
+
+  const values = {
+    name:$("activityName").value.trim(),
+    role:$("activityRole").value.trim(),
+    description:$("activityDescription").value.trim()
+  };
+
+  if(!values.name){
+    alert("Enter an activity name.");
+    return;
+  }
+
+  if(editingActivity){
+    const index = data.activities.findIndex(
+      a => a.id === editingActivity
+    );
+
+    if(index >= 0){
+      data.activities[index] = {
+        ...data.activities[index],
+        ...values
+      };
+    }
+  }else{
+    data.activities.push({id:id(),...values});
+  }
+
+  editingActivity = null;
+  $("activityEditor").classList.add("hidden");
+
+  markChanged();
+  renderAll();
+};
+
+function renderActivities(){
+  const box = $("activityList");
+  box.innerHTML = "";
+
+  if(!data.activities.length){
+    box.innerHTML =
+      '<div class="card muted">No activities added yet.</div>';
+    return;
+  }
+
+  data.activities.forEach(activity => {
+    const card = document.createElement("div");
+    card.className = "card";
+
+    card.innerHTML = `
+      <div class="row between">
+        <div>
+          <h3>${escapeHTML(activity.name)}</h3>
+          <p class="small">${escapeHTML(activity.role)}</p>
+        </div>
+        <div class="row">
+          <button class="btn secondary edit">Edit</button>
+          <button class="btn danger remove">Remove</button>
+        </div>
+      </div>
+      <p>${escapeHTML(activity.description)}</p>
+    `;
+
+    card.querySelector(".edit").onclick =
+      () => openActivityEditor(activity.id);
+
+    card.querySelector(".remove").onclick = () => {
+      if(!confirm("Remove this activity?")) return;
+
+      data.activities = data.activities.filter(
+        a => a.id !== activity.id
+      );
+
+      markChanged();
+      renderAll();
+    };
+
+    box.appendChild(card);
+  });
+}
+
+/* ======================================================
+   ESSAY
+   ====================================================== */
+
+function collectEssay(){
+  data.essay = $("essayText").value;
+  data.prompt = $("essayPrompt").value;
+}
+
+function updateWordCount(){
+  const text = $("essayText").value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  $("wordCount").textContent = words + " words";
+}
+
+["essayText","essayPrompt"].forEach(field => {
+  $(field).oninput = () => {
+    if(!ready) return;
+
+    collectEssay();
+    updateWordCount();
+    markChanged();
+    renderDashboard();
+  };
+});
+
+$("saveEssay").onclick = async () => {
+  collectEssay();
+  markChanged();
+  await saveCloud();
+};
+
+window.addEventListener("pagehide",() => {
+  if(!ready) return;
+  collectEssay();
+  localBackup();
+});
+
+/* ======================================================
+   PROFILE
+   ====================================================== */
+
+$("profileName").oninput = () => {
+  if(!ready) return;
+
+  data.name = $("profileName").value;
+  markChanged();
+  renderDashboard();
+};
+
+$("saveProfile").onclick = async () => {
+  if(!ready) return;
+
+  data.name = $("profileName").value.trim();
+  markChanged();
+  await saveCloud();
+};
+
+/* ======================================================
+   DASHBOARD
+   ====================================================== */
+
+function renderDashboard(){
+  if(!user) return;
+
+  const name =
+    data.name.trim() ||
+    user.user_metadata?.user_name ||
+    user.email?.split("@")[0] ||
+    "there";
+
+  $("welcome").textContent =
+    "Welcome back, " + name + " 👋";
+
+  $("statColleges").textContent = data.colleges.length;
+  $("statActivities").textContent = data.activities.length;
+
+  const checks = [
+    data.colleges.length > 0,
+    data.colleges.some(c => c.deadline),
+    data.colleges.some(c => (c.requirements || []).length),
+    data.activities.length > 0,
+    data.essay.trim().length > 0
+  ];
+
+  const progress = Math.round(
+    checks.filter(Boolean).length / checks.length * 100
+  );
+
+  $("statProgress").textContent = progress + "%";
+  $("progressFill").style.width = progress + "%";
+
+  const today = new Date().toLocaleDateString("en-CA");
+
+  const upcoming = data.colleges
+    .filter(c => c.deadline && c.deadline >= today)
+    .sort((a,b) => a.deadline.localeCompare(b.deadline))
+    .slice(0,5);
+
+  $("upcomingDeadlines").innerHTML = upcoming.length
+    ? upcoming.map(c => `
+      <p>
+        <strong>${escapeHTML(c.name)}</strong><br>
+        <span class="small">${escapeHTML(c.deadline)}</span>
+      </p>
+    `).join("")
+    : '<p class="muted">No upcoming deadlines recorded.</p>';
+
+  const steps = [];
+
+  if(!data.colleges.length)
+    steps.push("Add your first college.");
+
+  if(!data.activities.length)
+    steps.push("Add an activity.");
+
+  if(!data.essay.trim())
+    steps.push("Start your personal essay.");
+
+  if(!steps.length)
+    steps.push("Review university requirements and deadlines.");
+
+  $("nextSteps").innerHTML = steps
+    .map(s => `<p>○ ${escapeHTML(s)}</p>`)
+    .join("");
+}
+
+/* ======================================================
+   APPLICATION REVIEW
+   ====================================================== */
+
+function renderReadiness(){
+  const checks = [
+    ["At least one college added",data.colleges.length > 0],
+    [
+      "All college deadlines recorded",
+      data.colleges.length > 0 &&
+      data.colleges.every(c => c.deadline)
+    ],
+    [
+      "All college requirements checked off",
+      data.colleges.length > 0 &&
+      data.colleges.every(c =>
+        (c.requirements || []).length > 0 &&
+        (c.requirements || []).every(r =>
+          (c.completed || []).includes(r)
+        )
+      )
+    ],
+    ["At least one activity added",data.activities.length > 0],
+    ["Personal essay started",data.essay.trim().length > 0]
+  ];
+
+  $("readiness").innerHTML = checks.map(([name,done]) => `
+    <p>${done ? "✅" : "○"} ${escapeHTML(name)}</p>
+  `).join("");
+}
+
+function basicReview(section){
+  const tips = [];
+
+  if(section === "essay" || section === "review"){
+    const words = data.essay.trim()
+      ? data.essay.trim().split(/\s+/).length
+      : 0;
+
+    if(!words) tips.push("Start your essay.");
+    else if(words < 250)
+      tips.push("Consider adding more detail to your essay.");
+
+    if(words > 650)
+      tips.push("Check the word limit for your essay.");
+  }
+
+  if(section === "activities" || section === "review"){
+    if(!data.activities.length)
+      tips.push("Add your activities.");
+
+    data.activities.forEach(a => {
+      if(!a.role)
+        tips.push(a.name + ": Add your role.");
+
+      if((a.description || "").length < 90)
+        tips.push(a.name + ": Explain your impact more clearly.");
+    });
+  }
+
+  if(section === "colleges" || section === "review"){
+    if(!data.colleges.length)
+      tips.push("Add colleges.");
+
+    data.colleges.forEach(c => {
+      if(!c.deadline)
+        tips.push(c.name + ": Confirm the application deadline.");
+
+      if(!c.verified)
+        tips.push(c.name + ": Verify requirements on the official site.");
+
+      const remaining = (c.requirements || [])
+        .filter(r => !(c.completed || []).includes(r));
+
+      if(remaining.length)
+        tips.push(c.name + ": " + remaining.length +
+          " checklist items remaining.");
+    });
+  }
+
+  if(!tips.length){
+    tips.push("No obvious missing fields found.");
+    tips.push("Check official requirements before submitting.");
+  }
+
+  return "BASIC REVIEW — NOT AI\n\n• " +
+    tips.join("\n• ");
+}
+
+const answerIds = {
+  colleges:"collegeAnswer",
+  activities:"activityAnswer",
+  essay:"essayAnswer",
+  review:"reviewAnswer"
+};
+
+const questionIds = {
+  colleges:"collegeQuestion",
+  activities:"activityQuestion",
+  essay:"essayQuestion",
+  review:"reviewQuestion"
+};
+
+function showAnswer(section,message){
+  const box = $(answerIds[section]);
+  box.textContent = message;
+  box.classList.remove("hidden");
+}
+
+document.querySelectorAll("[data-basic]").forEach(button => {
+  button.onclick = () => {
+    showAnswer(
+      button.dataset.basic,
+      basicReview(button.dataset.basic)
+    );
+  };
+});
+
+/* ======================================================
+   REAL AI — EXISTING SUPABASE EDGE FUNCTION
+   ====================================================== */
+
+document.querySelectorAll("[data-ai]").forEach(button => {
+  button.onclick = async () => {
+    const section = button.dataset.ai;
+    const question = $(questionIds[section]).value.trim();
+
+    if(!question){
+      showAnswer(section,"Type a question first.");
+      return;
+    }
+
+    if(!ready){
+      showAnswer(section,"Wait for cloud data to finish loading.");
+      return;
+    }
+
+    button.disabled = true;
+    showAnswer(section,"Thinking...");
+
+    try{
+      collectEssay();
+
+      // Ensure the latest changes are saved before AI reads
+      // the application context from Supabase.
+      if(changeVersion > savedVersion){
+        await saveCloud();
+      }
+
+      if(changeVersion > savedVersion){
+        throw new Error(
+          "Save your latest changes to the cloud before asking AI."
+        );
+      }
+
+      const {data:sessionData,error:sessionError} =
+        await db.auth.getSession();
+
+      if(sessionError || !sessionData.session){
+        throw new Error("Please sign in again.");
+      }
+
+      const {data:result,error} =
+        await db.functions.invoke("applypilot-ai",{
+          body:{section,question}
+        });
+
+      if(error){
+        const details =
+          await error.context?.json?.().catch(() => null);
+
+        throw new Error(details?.error || error.message);
+      }
+
+      showAnswer(
+        section,
+        result?.feedback || "No AI feedback returned."
+      );
+
+    }catch(error){
+      showAnswer(
+        section,
+        "AI request failed: " + error.message +
+        "\n\nCheck your Supabase Edge Function setup."
+      );
+    }finally{
+      button.disabled = false;
+    }
+  };
+});
+
+/* ======================================================
+   START APP
+   ====================================================== */
+
+function renderAll(){
+  renderDashboard();
+  renderColleges();
+  renderActivities();
+  renderReadiness();
+}
+
+async function initialize(){
+  try{
+    const {data:session,error} =
+      await db.auth.getSession();
+
+    if(error) throw error;
+
+    if(session.session){
+      await showApp(session.session.user);
+    }else{
+      showAuth();
+    }
+
+  }catch(error){
+    showAuth();
+    $("authMessage").textContent = error.message;
+  }
+}
+
+initialize();
+
+</script>
 </body>
 </html>
