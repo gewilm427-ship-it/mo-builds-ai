@@ -1789,7 +1789,7 @@ document.querySelectorAll("[data-ai]").forEach(button=>{
       showAnswer(section,"Thinking...");
 
       const {data:result,error}=await db.functions.invoke(
-        "applypilot-ai",
+        "smooth-processor",
         {body:{section,question}}
       );
 
