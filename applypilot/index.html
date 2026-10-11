@@ -4,212 +4,72 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ApplyPilot — College Application Planner</title>
-
 <style>
 :root{
-  --blue:#405de6;
-  --dark:#17243d;
-  --muted:#6d7b92;
-  --bg:#f5f7fc;
-  --border:#e0e6f0;
-  --green:#178365;
+  --blue:#405de6;--dark:#182641;--muted:#718099;
+  --bg:#f5f7fc;--border:#e0e6f0;--green:#177c60;
 }
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--dark);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
-}
+body{margin:0;background:var(--bg);color:var(--dark);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
 button,input,textarea,select{font:inherit}
 button{cursor:pointer}
-button:disabled{opacity:.6;cursor:not-allowed}
-h1{font-size:29px;margin:0 0 10px}
+button:disabled{opacity:.55;cursor:not-allowed}
+h1{font-size:29px;margin:0 0 9px}
 h2{font-size:21px;margin:0 0 12px}
 h3{font-size:17px;margin:0 0 12px}
-p{line-height:1.6}
+p{line-height:1.55}
 a{color:var(--blue);overflow-wrap:anywhere}
 .hidden{display:none!important}
 .muted,.small{color:var(--muted)}
 .small{font-size:13px}
-.card{
-  background:white;
-  border:1px solid var(--border);
-  border-radius:17px;
-  padding:22px;
-  margin-bottom:17px;
-}
-.btn{
-  border:0;
-  background:var(--blue);
-  color:white;
-  padding:11px 16px;
-  border-radius:10px;
-  font-weight:700;
-}
+.card{background:white;border:1px solid var(--border);border-radius:17px;padding:22px;margin-bottom:17px}
+.btn{border:0;background:var(--blue);color:white;padding:11px 16px;border-radius:10px;font-weight:700}
 .btn.secondary{background:#eaf0ff;color:var(--blue)}
 .btn.outline{background:white;color:var(--dark);border:1px solid var(--border)}
-.btn.danger{background:#ffeff0;color:#bd4350}
+.btn.danger{background:#fff0f1;color:#b93847}
 .row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .between{justify-content:space-between}
 .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
 .stat{font-size:32px;font-weight:800}
-label{display:block;font-size:14px;font-weight:650;margin:15px 0 7px}
+label.field{display:block;font-size:14px;font-weight:650;margin:15px 0 7px}
 input:not([type=checkbox]),textarea,select{
-  width:100%;
-  display:block;
-  padding:12px;
-  background:white;
-  border:1px solid #d5ddec;
-  border-radius:10px;
-  color:var(--dark);
+  display:block;width:100%;padding:12px;border:1px solid #d5ddec;
+  border-radius:10px;color:var(--dark);background:white
 }
-textarea{min-height:110px;resize:vertical;line-height:1.6}
-.notice{
-  padding:14px;
-  border-radius:11px;
-  background:#eef3ff;
-  color:#435984;
-  font-size:13px;
-  line-height:1.6;
-  margin:14px 0;
-}
-.success{background:#ebf8f3;color:#176d56}
-.feedback{
-  white-space:pre-wrap;
-  line-height:1.7;
-  background:#f0f3ff;
-  border:1px solid #dbe3ff;
-  padding:16px;
-  border-radius:12px;
-  margin-top:14px;
-}
-.check{
-  display:flex;
-  align-items:flex-start;
-  gap:10px;
-  font-size:14px;
-  font-weight:500;
-  margin:11px 0;
-}
+textarea{min-height:105px;resize:vertical;line-height:1.6}
+.notice{padding:14px;border-radius:11px;background:#eef3ff;color:#405680;font-size:13px;line-height:1.6;margin:14px 0}
+.notice.good{background:#e9f8f1;color:#176e55}
+.notice.warn{background:#fff5e7;color:#8c5a16}
+.feedback{white-space:pre-wrap;line-height:1.7;background:#f0f3ff;border:1px solid #dbe3ff;padding:16px;border-radius:12px;margin-top:14px}
+.check{display:flex;align-items:flex-start;gap:10px;font-size:14px;font-weight:500;margin:11px 0}
 .check input{width:auto;margin-top:3px}
-.pill{
-  display:inline-block;
-  background:#edf1ff;
-  color:var(--blue);
-  border-radius:25px;
-  padding:5px 10px;
-  font-size:12px;
-}
-.logo{
-  width:43px;height:43px;
-  display:grid;place-items:center;
-  border-radius:13px;
-  background:var(--blue);
-  color:white;
-  font-size:24px;
-  font-weight:900;
-}
-#authPage{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:20px;
-}
+.pill{display:inline-block;background:#edf1ff;color:var(--blue);border-radius:25px;padding:5px 10px;font-size:12px}
+.logo{width:43px;height:43px;display:grid;place-items:center;border-radius:13px;background:var(--blue);color:white;font-size:24px;font-weight:900}
+#authPage{min-height:100vh;display:grid;place-items:center;padding:20px}
 .authWrap{width:100%;max-width:430px}
 .authBrand{text-align:center;margin-bottom:22px}
 .authBrand .logo{margin:auto}
 #appPage{display:flex;min-height:100vh}
-.sidebar{
-  width:245px;
-  flex-shrink:0;
-  background:white;
-  border-right:1px solid var(--border);
-  padding:22px 13px;
-  display:flex;
-  flex-direction:column;
-}
-.brand{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  font-size:22px;
-  font-weight:800;
-  padding:0 9px 26px;
-}
+.sidebar{width:245px;flex-shrink:0;background:white;border-right:1px solid var(--border);padding:22px 13px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:800;padding:0 9px 26px}
 nav{display:grid;gap:5px}
-nav button{
-  border:0;
-  background:transparent;
-  padding:13px;
-  border-radius:10px;
-  text-align:left;
-  color:#6c7c95;
-  font-weight:650;
-}
-nav button.active,nav button:hover{
-  background:#edf1ff;
-  color:var(--blue);
-}
+nav button{border:0;background:transparent;padding:13px;border-radius:10px;text-align:left;color:#6c7c95;font-weight:650}
+nav button.active,nav button:hover{background:#edf1ff;color:var(--blue)}
 .sidebarBottom{margin-top:auto;padding:18px 9px 0;overflow-wrap:anywhere}
-.main{
-  width:100%;
-  max-width:1250px;
-  min-width:0;
-  margin:auto;
-  padding:35px clamp(17px,4vw,50px);
-}
+.main{width:100%;max-width:1250px;min-width:0;margin:auto;padding:35px clamp(17px,4vw,50px)}
 .section{display:none}
 .section.active{display:block}
-.hero{
-  background:linear-gradient(115deg,#3047b7,#697ff1);
-  color:white;
-  padding:33px;
-  border-radius:20px;
-  margin:18px 0;
-}
+.hero{background:linear-gradient(115deg,#3047b7,#697ff1);color:white;padding:33px;border-radius:20px;margin:18px 0}
 .hero p{color:#e8ecff}
 .hero .btn{background:white;color:var(--blue)}
-.pageHead{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:12px;
-  margin-bottom:18px;
-}
-.searchResults{
-  max-height:330px;
-  overflow:auto;
-  border:1px solid var(--border);
-  border-radius:10px;
-  margin-top:10px;
-}
-.searchResult{
-  width:100%;
-  display:block;
-  text-align:left;
-  padding:13px;
-  background:white;
-  border:0;
-  border-bottom:1px solid var(--border);
-}
+.pageHead{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:18px}
+.searchResults{max-height:320px;overflow:auto;border:1px solid var(--border);border-radius:10px;margin-top:10px}
+.searchResult{width:100%;display:block;text-align:left;padding:13px;background:white;border:0;border-bottom:1px solid var(--border)}
 .searchResult:hover{background:#f0f3ff}
-.requirement{
-  border:1px solid var(--border);
-  border-radius:10px;
-  padding:11px 13px;
-  margin:8px 0;
-}
-.requirement .check{margin:0}
-.progress{
-  height:8px;
-  background:#e9edf6;
-  border-radius:20px;
-  overflow:hidden;
-}
+.progress{height:8px;background:#e9edf6;border-radius:20px;overflow:hidden}
 .progressFill{height:100%;background:var(--blue);width:0}
+#globalNotice{margin-bottom:16px}
 @media(max-width:800px){
   #appPage{display:block}
   .sidebar{width:100%;padding:12px}
@@ -223,11 +83,9 @@ nav button.active,nav button:hover{
 }
 </style>
 </head>
-
 <body>
 
-<!-- AUTHENTICATION -->
-
+<!-- SIGN IN -->
 <div id="authPage">
   <div class="authWrap">
     <div class="authBrand">
@@ -235,53 +93,36 @@ nav button.active,nav button:hover{
       <h1 style="margin-top:13px">ApplyPilot</h1>
       <p class="muted">Your future, organized.</p>
     </div>
-
     <div class="card">
       <h2 id="authTitle">Welcome back</h2>
-      <p class="muted">Sign in to manage your applications.</p>
+      <p class="muted">Sign in to organize your applications.</p>
 
-      <button id="githubLogin" class="btn"
-        style="width:100%;background:#242936">
+      <button id="githubLogin" class="btn" style="width:100%;background:#242936">
         Continue with GitHub
       </button>
 
-      <p class="small" style="text-align:center;margin:19px 0">
-        — or use email —
-      </p>
+      <p class="small" style="text-align:center;margin:19px 0">— or use email —</p>
 
       <form id="authForm">
-        <label>Email</label>
-        <input id="email" type="email" required autocomplete="email">
-
-        <label>Password</label>
+        <label class="field" for="email">Email</label>
+        <input id="email" type="email" autocomplete="email" required>
+        <label class="field" for="password">Password</label>
         <input id="password" type="password" minlength="6" required>
-
-        <button id="authSubmit" class="btn"
-          style="width:100%;margin-top:20px">
-          Sign in
-        </button>
+        <button id="authSubmit" class="btn" style="width:100%;margin-top:20px">Sign in</button>
       </form>
 
-      <button id="switchAuth" class="btn outline"
-        style="width:100%;margin-top:11px">
+      <button id="switchAuth" class="btn outline" style="width:100%;margin-top:11px">
         Create an account instead
       </button>
-
       <p id="authMessage" class="small" role="status"></p>
     </div>
   </div>
 </div>
 
-<!-- MAIN APP -->
-
+<!-- APPLICATION -->
 <div id="appPage" class="hidden">
-
   <aside class="sidebar">
-    <div class="brand">
-      <span class="logo">A</span>
-      ApplyPilot
-    </div>
-
+    <div class="brand"><span class="logo">A</span>ApplyPilot</div>
     <nav>
       <button class="active" data-page="dashboard">◫ Dashboard</button>
       <button data-page="colleges">▤ My Colleges</button>
@@ -290,108 +131,70 @@ nav button.active,nav button:hover{
       <button data-page="review">✓ Application Review</button>
       <button data-page="profile">⚙ Profile</button>
     </nav>
-
     <div class="sidebarBottom">
       <p id="accountEmail" class="small"></p>
-      <p id="cloudStatus" class="small">Cloud: connecting...</p>
+      <p id="cloudStatus" class="small">Checking storage...</p>
+      <button id="retrySync" class="btn secondary" style="margin-bottom:9px">Retry Cloud Sync</button>
       <button id="signOut" class="btn outline">Sign out</button>
     </div>
   </aside>
 
   <main class="main">
-
-    <!-- DASHBOARD -->
+    <div id="globalNotice" class="notice hidden" role="status"></div>
 
     <section id="dashboard" class="section active">
       <p class="small">YOUR APPLICATION WORKSPACE</p>
-
       <div class="hero">
         <h1 id="welcome">Welcome back!</h1>
-        <p>
-          Explore universities, see admissions requirements,
-          track deadlines, and build stronger applications.
-        </p>
-        <button class="btn" data-go="colleges">
-          Explore colleges →
-        </button>
+        <p>Find universities, organize admissions requirements, track deadlines, and improve your applications.</p>
+        <button class="btn" data-go="colleges">Explore colleges →</button>
       </div>
 
       <div class="stats">
-        <div class="card">
-          <p class="muted">My colleges</p>
-          <div class="stat" id="statColleges">0</div>
-        </div>
-        <div class="card">
-          <p class="muted">Activities</p>
-          <div class="stat" id="statActivities">0</div>
-        </div>
+        <div class="card"><p class="muted">My colleges</p><div class="stat" id="statColleges">0</div></div>
+        <div class="card"><p class="muted">Activities</p><div class="stat" id="statActivities">0</div></div>
         <div class="card">
           <p class="muted">Progress</p>
           <div class="stat" id="statProgress">0%</div>
-          <div class="progress">
-            <div class="progressFill" id="progressFill"></div>
-          </div>
+          <div class="progress"><div class="progressFill" id="progressFill"></div></div>
         </div>
       </div>
 
       <div class="grid">
-        <div class="card">
-          <h3>Upcoming deadlines</h3>
-          <div id="upcomingDeadlines"></div>
-        </div>
-        <div class="card">
-          <h3>Your next steps</h3>
-          <div id="nextSteps"></div>
-        </div>
+        <div class="card"><h3>Upcoming deadlines</h3><div id="upcomingDeadlines"></div></div>
+        <div class="card"><h3>Your next steps</h3><div id="nextSteps"></div></div>
       </div>
     </section>
 
-    <!-- COLLEGES -->
-
     <section id="colleges" class="section">
-
       <div class="pageHead">
         <div>
           <h1>My Colleges</h1>
-          <p class="muted">
-            Search universities and automatically load available
-            admissions information.
-          </p>
+          <p class="muted">Find a university and load its available admissions information.</p>
         </div>
         <button id="addCollege" class="btn">+ Add Manually</button>
       </div>
 
       <div class="card">
         <h3>Find a university</h3>
-
-        <input id="collegeSearch"
-          placeholder="Try a and m, u of h, Harvard, NYU..."
-          autocomplete="off">
-
-        <p id="searchStatus" class="small">
-          Type at least 2 characters.
-        </p>
-
+        <input id="collegeSearch" placeholder="Try tamu, u of h, Harvard, NYU..." autocomplete="off">
+        <p id="searchStatus" class="small">Type at least 2 characters.</p>
         <div id="searchResults" class="searchResults hidden"></div>
-
         <div class="notice">
-          Selecting a university automatically fills in its
-          available admissions website and requirements.
-          Verified profiles have university-specific information;
-          other schools use a checklist of requirements to confirm.
+          ApplyPilot automatically fills in known official admissions pages and starter requirements.
+          For other universities, it finds the university website where possible and labels requirements as unverified.
         </div>
       </div>
 
       <div id="collegeEditor" class="card hidden">
         <h2 id="collegeEditorTitle">Add College</h2>
-
-        <label>University</label>
+        <label class="field" for="collegeName">University name</label>
         <input id="collegeName">
 
-        <label>Application deadline</label>
+        <label class="field" for="collegeDeadline">Application deadline</label>
         <input id="collegeDeadline" type="date">
 
-        <label>Application status</label>
+        <label class="field" for="collegeStatus">Application status</label>
         <select id="collegeStatus">
           <option>Researching</option>
           <option>Planning to apply</option>
@@ -401,16 +204,23 @@ nav button.active,nav button:hover{
         </select>
 
         <div id="collegeInfo" class="notice"></div>
-
-        <h3>Admissions website</h3>
+        <h3>University website</h3>
         <div id="collegeWebsiteBox"></div>
+
+        <label class="field" for="collegeURL">Website URL (optional correction)</label>
+        <input id="collegeURL" type="url" placeholder="https://...">
 
         <h3 style="margin-top:23px">Application requirements</h3>
         <div id="editorRequirements"></div>
 
-        <label>Supplemental essays and notes</label>
-        <textarea id="collegeNotes"
-          placeholder="Essay prompts, scholarships, reminders..."></textarea>
+        <div class="row">
+          <input id="customRequirement" style="flex:1;min-width:170px"
+            placeholder="Add another requirement">
+          <button id="addRequirement" class="btn secondary">+ Add Item</button>
+        </div>
+
+        <label class="field" for="collegeNotes">Supplemental essays and notes</label>
+        <textarea id="collegeNotes" placeholder="Essay prompts, scholarships, reminders..."></textarea>
 
         <div class="row">
           <button id="saveCollege" class="btn">Save College</button>
@@ -422,46 +232,32 @@ nav button.active,nav button:hover{
 
       <div class="card">
         <h3>✦ Ask ApplyPilot AI — Colleges</h3>
-        <textarea id="collegeQuestion"
-          placeholder="What should I prepare for my college applications?"></textarea>
-
+        <textarea id="collegeQuestion" placeholder="What should I prepare for my colleges?"></textarea>
         <div class="row">
           <button class="btn" data-ai="colleges">Ask AI</button>
-          <button class="btn secondary" data-basic="colleges">
-            Basic Review
-          </button>
+          <button class="btn secondary" data-basic="colleges">Basic Review</button>
         </div>
-
         <div id="collegeAnswer" class="feedback hidden"></div>
       </div>
     </section>
-
-    <!-- ACTIVITIES -->
 
     <section id="activities" class="section">
       <div class="pageHead">
         <div>
           <h1>Activities</h1>
-          <p class="muted">
-            Show your leadership, involvement, and impact.
-          </p>
+          <p class="muted">Show your leadership, involvement, and impact.</p>
         </div>
         <button id="addActivity" class="btn">+ Add Activity</button>
       </div>
 
       <div id="activityEditor" class="card hidden">
         <h3 id="activityEditorTitle">Add Activity</h3>
-
-        <label>Activity name</label>
+        <label class="field" for="activityName">Activity name</label>
         <input id="activityName" placeholder="Student Council">
-
-        <label>Your role</label>
+        <label class="field" for="activityRole">Your role</label>
         <input id="activityRole" placeholder="President">
-
-        <label>Description</label>
-        <textarea id="activityDescription"
-          placeholder="What did you do and what impact did you have?"></textarea>
-
+        <label class="field" for="activityDescription">Description</label>
+        <textarea id="activityDescription" placeholder="What did you do? What impact did you have?"></textarea>
         <div class="row">
           <button id="saveActivity" class="btn">Save Activity</button>
           <button id="cancelActivity" class="btn outline">Cancel</button>
@@ -472,135 +268,118 @@ nav button.active,nav button:hover{
 
       <div class="card">
         <h3>✦ Ask ApplyPilot AI — Activities</h3>
-        <textarea id="activityQuestion"
-          placeholder="How can I improve my activities list?"></textarea>
-
+        <textarea id="activityQuestion" placeholder="How can I improve my activities list?"></textarea>
         <div class="row">
           <button class="btn" data-ai="activities">Ask AI</button>
-          <button class="btn secondary" data-basic="activities">
-            Basic Review
-          </button>
+          <button class="btn secondary" data-basic="activities">Basic Review</button>
         </div>
-
         <div id="activityAnswer" class="feedback hidden"></div>
       </div>
     </section>
 
-    <!-- ESSAY -->
-
     <section id="essay" class="section">
       <h1>Personal Essay</h1>
-      <p class="muted">Write your story. Your essay saves automatically.</p>
-
+      <p class="muted">Your draft is backed up locally as you type and synced to Supabase when available.</p>
       <div class="card">
-        <label>Essay prompt</label>
-        <textarea id="essayPrompt" style="min-height:90px"
-          placeholder="Paste your essay prompt..."></textarea>
-
-        <label>Your essay</label>
-        <textarea id="essayText" style="min-height:350px"
-          placeholder="Start writing..."></textarea>
-
+        <label class="field" for="essayPrompt">Essay prompt</label>
+        <textarea id="essayPrompt" style="min-height:90px" placeholder="Paste your essay prompt..."></textarea>
+        <label class="field" for="essayText">Your essay</label>
+        <textarea id="essayText" style="min-height:350px" placeholder="Start writing..."></textarea>
         <div class="row between">
           <span id="wordCount" class="small">0 words</span>
           <span id="saveStatus" class="small">Ready</span>
         </div>
-
-        <button id="saveEssay" class="btn" style="margin-top:15px">
-          Save Now
-        </button>
+        <button id="saveEssay" class="btn" style="margin-top:15px">Save Now</button>
       </div>
 
       <div class="card">
         <h3>✦ Ask ApplyPilot AI — Essay</h3>
-
-        <textarea id="essayQuestion"
-          placeholder="How can I make my introduction stronger?"></textarea>
-
+        <textarea id="essayQuestion" placeholder="How can I improve my introduction?"></textarea>
         <div class="row">
           <button class="btn" data-ai="essay">Ask AI</button>
-          <button class="btn secondary" data-basic="essay">
-            Basic Review
-          </button>
+          <button class="btn secondary" data-basic="essay">Basic Review</button>
         </div>
-
         <div id="essayAnswer" class="feedback hidden"></div>
       </div>
     </section>
 
-    <!-- REVIEW -->
-
     <section id="review" class="section">
       <h1>Application Review</h1>
       <p class="muted">See what's ready and what's missing.</p>
-
-      <div class="card">
-        <h3>Readiness checklist</h3>
-        <div id="readiness"></div>
-      </div>
-
+      <div class="card"><h3>Readiness checklist</h3><div id="readiness"></div></div>
       <div class="card">
         <h3>✦ Ask ApplyPilot AI — Full Application</h3>
-
-        <textarea id="reviewQuestion"
-          placeholder="What should I focus on improving?"></textarea>
-
+        <textarea id="reviewQuestion" placeholder="What should I improve first?"></textarea>
         <div class="row">
           <button class="btn" data-ai="review">Ask AI</button>
-          <button class="btn secondary" data-basic="review">
-            Basic Review
-          </button>
+          <button class="btn secondary" data-basic="review">Basic Review</button>
         </div>
-
         <div id="reviewAnswer" class="feedback hidden"></div>
       </div>
     </section>
 
-    <!-- PROFILE -->
-
     <section id="profile" class="section">
       <h1>Your Profile</h1>
-
       <div class="card">
-        <label>Preferred name</label>
+        <label class="field" for="profileName">Preferred name</label>
         <input id="profileName" placeholder="Your name">
-
-        <button id="saveProfile" class="btn" style="margin-top:16px">
-          Save Name
-        </button>
+        <button id="saveProfile" class="btn" style="margin-top:16px">Save Name</button>
       </div>
-
       <div class="card">
         <h3>Account</h3>
         <p id="profileEmail"></p>
         <p id="profileCloudStatus" class="small"></p>
+        <button id="exportBackup" class="btn secondary">Download My Data Backup</button>
       </div>
     </section>
 
     <p class="small" style="margin-top:35px">
-      ApplyPilot is an application organizer, not an official admissions
-      service. Always confirm requirements and deadlines with the university.
+      ApplyPilot is not an official admissions service.
+      Always confirm deadlines and requirements with the university.
     </p>
   </main>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <script>
-/* ======================================================
-   PUT YOUR SUPABASE DETAILS HERE
-   ====================================================== */
+"use strict";
+
+/* ==========================================================
+   STEP 1: REPLACE THESE TWO VALUES WITH YOUR REAL SUPABASE KEYS
+   ========================================================== */
 
 const SUPABASE_URL = "https://kfnykqknnewusttxltzd.supabase.co";
 const SUPABASE_KEY = "sb_publishable_uHTdcLU3gcBg-APDq_iUNA_0hK0zpxr";
 
-/* ======================================================
-   SUPABASE
-   ====================================================== */
+/*
+  DO NOT put an OpenAI secret, Supabase secret key, or
+  service_role key in this file.
+*/
 
-const db = supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+const $ = name => document.getElementById(name);
+const PUBLIC_SITE = "https://gewilm427-ship-it.github.io/mo-builds-ai/applypilot/";
+const CONFIGURED =
+  SUPABASE_URL.startsWith("https://") &&
+  !SUPABASE_URL.includes("PASTE_") &&
+  SUPABASE_KEY.length > 20 &&
+  !SUPABASE_KEY.includes("PASTE_");
 
-const $ = id => document.getElementById(id);
+let db = null;
+
+if(CONFIGURED && window.supabase?.createClient){
+  db = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY,
+    {
+      auth:{
+        persistSession:true,
+        autoRefreshToken:true,
+        detectSessionInUrl:true,
+        flowType:"implicit"
+      }
+    }
+  );
+}
 
 function escapeHTML(value){
   return String(value ?? "")
@@ -611,17 +390,18 @@ function escapeHTML(value){
     .replaceAll("'","&#39;");
 }
 
-function norm(value){
+function normalize(value){
   return String(value || "")
     .toLowerCase()
-    .replaceAll("&"," and ")
+    .replace(/&/g," and ")
     .replace(/[^a-z0-9 ]/g," ")
     .replace(/\s+/g," ")
     .trim();
 }
 
-function id(){
-  return crypto.randomUUID();
+function makeId(){
+  if(crypto.randomUUID) return crypto.randomUUID();
+  return Date.now() + "-" + Math.random().toString(36).slice(2);
 }
 
 function blankData(){
@@ -634,35 +414,42 @@ function blankData(){
   };
 }
 
-let user = null;
-let data = blankData();
-let ready = false;
-let authMode = "signin";
-let editingCollege = null;
-let editingActivity = null;
-let saveTimer = null;
-let searchTimer = null;
-let searchVersion = 0;
-let loadVersion = 0;
-let changeVersion = 0;
-let savedVersion = 0;
-let saving = false;
+function sanitizeData(value){
+  const source = value && typeof value === "object" ? value : {};
+  return {
+    name:typeof source.name === "string" ? source.name : "",
+    colleges:Array.isArray(source.colleges) ? source.colleges : [],
+    activities:Array.isArray(source.activities) ? source.activities : [],
+    essay:typeof source.essay === "string" ? source.essay : "",
+    prompt:typeof source.prompt === "string" ? source.prompt : ""
+  };
+}
 
-/* ======================================================
-   UNIVERSITY ADMISSIONS DATABASE
+function message(text,type=""){
+  const el = $("globalNotice");
+  el.textContent = text;
+  el.className = "notice" + (type ? " " + type : "");
+}
 
-   "verified" means the starter information was taken
-   from an official admissions page, NOT that it covers
-   every program or every applicant type.
+function hideMessage(){
+  $("globalNotice").classList.add("hidden");
+}
 
-   Other schools get a verification checklist.
-   ====================================================== */
+function storageMessage(text){
+  $("cloudStatus").textContent = text;
+  $("profileCloudStatus").textContent = text;
+  $("saveStatus").textContent = text;
+}
 
-const GENERAL_CHECKLIST = [
+/* ==========================================================
+   UNIVERSITY DIRECTORY
+   ========================================================== */
+
+const GENERIC_REQUIREMENTS = [
   "Application form and submission platform",
   "Application fee or fee waiver",
   "High school transcript or academic record",
-  "Personal essay or statement",
+  "Personal essay or statement, if required",
   "Supplemental essays, if required",
   "Activities list or résumé, if required",
   "Recommendation letters, if required",
@@ -672,42 +459,42 @@ const GENERAL_CHECKLIST = [
   "Scholarship and financial aid documents"
 ];
 
-const SCHOOL_PROFILES = [
+const VERIFIED_PROFILES = [
   {
     name:"Texas A&M University",
     state:"Texas",
-    aliases:["a and m","a&m","tamu","texas am","texas a and m"],
+    aliases:["tamu","a and m","a&m","texas am","texas a and m"],
     website:"https://www.tamu.edu/admissions/how-to-apply/apply-as-freshman.html",
     verified:true,
+    note:"Starter checklist based on Texas A&M freshman admissions information. Check your term, campus, residency, and program.",
     requirements:[
-      "Freshman application (Common App or ApplyTexas)",
+      "Freshman application through an accepted platform",
       "Application fee or approved fee waiver",
       "Required application essay",
-      "Self-reported Transcript and Academic Record (STARS), when applicable",
-      "Official transcript or other academic documents, when required",
-      "Residency or international applicant documents, when applicable",
-      "SAT/ACT scores: optional under the published freshman policy",
-      "Program-specific or campus-specific requirements"
-    ],
-    note:"Freshman admissions information. Some materials and deadlines differ by campus, term, residency and program."
+      "Self-reported academic record (STARS), when applicable",
+      "Academic transcripts or supporting records, when required",
+      "Testing policy for your application year",
+      "Residency or international applicant documents, if applicable",
+      "Major- or campus-specific requirements"
+    ]
   },
   {
     name:"University of Houston",
     state:"Texas",
-    aliases:["u of h","uh","uoh"],
+    aliases:["uh","u of h","uoh"],
     website:"https://www.uh.edu/undergraduate-admissions/apply/incoming-freshman/index.php",
     verified:true,
+    note:"Starter checklist for freshman applicants. Confirm testing pathways, major requirements, and applicant-specific documents.",
     requirements:[
-      "Freshman application (Common App or ApplyTexas)",
+      "Freshman application through an accepted platform",
       "Application fee or fee waiver",
-      "Self-reported academic grades or required academic record",
-      "Admissions essay",
-      "Activities list or résumé",
-      "SAT/ACT: choose the appropriate testing pathway",
-      "Additional documents for international applicants, if applicable",
-      "Additional requirements for selected majors"
-    ],
-    note:"University of Houston has distinct requirements for international applicants and some majors. Confirm the current term's testing and academic criteria."
+      "Required academic record or self-reported grades",
+      "Admissions essay, as applicable",
+      "Activities list or résumé, as applicable",
+      "Testing policy and admissions pathway",
+      "International applicant documents, if applicable",
+      "Selected-major additional requirements"
+    ]
   },
   {
     name:"Harvard University",
@@ -715,29 +502,24 @@ const SCHOOL_PROFILES = [
     aliases:["harvard","harvard college"],
     website:"https://college.harvard.edu/admissions/apply/first-year-applicants",
     verified:true,
+    note:"Starter checklist for Harvard College first-year applicants. Confirm the current cycle and testing exceptions.",
     requirements:[
       "Common Application",
       "Common Application personal essay",
+      "Harvard supplemental questions",
       "Activities list",
-      "Harvard supplemental short-answer questions",
       "Application fee or fee waiver",
-      "SAT or ACT, subject to Harvard's published exceptions",
+      "SAT/ACT or permitted alternative under Harvard's policy",
       "High school transcript and school report",
       "Counselor recommendation",
       "Two teacher recommendations",
       "Midyear school report",
       "Final school report if admitted"
-    ],
-    note:"Harvard's first-year requirements apply to domestic and international candidates, with specific standardized-testing exceptions."
+    ]
   }
 ];
 
-/*
-   Extra schools have name and abbreviation search.
-   Their admissions requirements are NOT marked verified.
-*/
-
-const EXTRA_SCHOOLS = [
+const SCHOOL_NAMES = [
   ["University of Texas at Austin","Texas",["ut austin","ut"]],
   ["University of Texas at Dallas","Texas",["utd"]],
   ["University of Texas at Arlington","Texas",["uta"]],
@@ -830,139 +612,102 @@ const EXTRA_SCHOOLS = [
 ];
 
 const ALL_SCHOOLS = [
-  ...SCHOOL_PROFILES,
-  ...EXTRA_SCHOOLS.map(([name,state,aliases]) => ({
-    name,state,aliases,
-    website:"",
-    verified:false,
-    requirements:[...GENERAL_CHECKLIST],
-    note:"Checklist of possible requirements. Not verified for this university."
+  ...VERIFIED_PROFILES,
+  ...SCHOOL_NAMES.map(([name,state,aliases])=>({
+    name,state,aliases,website:"",verified:false,
+    note:"Generic checklist only. Confirm each item with this university.",
+    requirements:[...GENERIC_REQUIREMENTS]
   }))
 ];
-
-function schoolMatch(query){
-  const q = norm(query);
-
-  return ALL_SCHOOLS.map(school => {
-    const terms = [
-      school.name,
-      ...(school.aliases || [])
-    ].map(norm);
-
-    let score = 0;
-
-    if(terms.some(t => t === q)) score = 100;
-    else if(terms.some(t => t.startsWith(q))) score = 70;
-    else if(terms.some(t => t.includes(q))) score = 40;
-
-    return {...school,score};
-  })
-  .filter(s => s.score > 0)
-  .sort((a,b) => b.score-a.score);
-}
-
-function findProfile(name){
-  return ALL_SCHOOLS.find(s => norm(s.name) === norm(name));
-}
 
 function validURL(value){
   try{
     const url = new URL(value);
-    return ["https:","http:"].includes(url.protocol);
-  }catch{
-    return false;
-  }
+    return url.protocol === "https:" || url.protocol === "http:";
+  }catch{return false;}
 }
 
-function safeLink(container,url,label){
-  container.innerHTML = "";
+function linkInto(container,url,text){
+  container.replaceChildren();
 
   if(!validURL(url)){
-    container.textContent =
-      "Official admissions link not available yet.";
+    container.textContent = "No website link found automatically.";
     return;
   }
 
   const a = document.createElement("a");
   a.href = url;
-  a.textContent = label;
+  a.textContent = text;
   a.target = "_blank";
   a.rel = "noopener noreferrer";
   container.appendChild(a);
 }
 
-/* ======================================================
-   UNIVERSITY SEARCH
+function schoolMatches(query){
+  const q = normalize(query);
+  return ALL_SCHOOLS.map(s=>{
+    const terms = [s.name,...(s.aliases||[])].map(normalize);
+    let score = 0;
+    if(terms.some(t=>t===q)) score=100;
+    else if(terms.some(t=>t.startsWith(q))) score=70;
+    else if(terms.some(t=>t.includes(q))) score=40;
+    return {...s,score};
+  }).filter(s=>s.score).sort((a,b)=>b.score-a.score);
+}
 
-   Built-in schools first, then public university directory.
-   Directory results can provide official university sites,
-   but NOT verified admissions-specific URLs.
-   ====================================================== */
+let searchTimer = null;
+let searchVersion = 0;
 
-function renderSearchResults(schools,message){
+function renderSearchResults(schools,status){
   const box = $("searchResults");
-  box.innerHTML = "";
-  $("searchStatus").textContent = message;
+  box.replaceChildren();
+  $("searchStatus").textContent = status;
 
   if(!schools.length){
     box.classList.add("hidden");
     return;
   }
 
-  schools.slice(0,50).forEach(school => {
-    const button = document.createElement("button");
-    button.className = "searchResult";
-    button.type = "button";
+  schools.slice(0,50).forEach(school=>{
+    const btn = document.createElement("button");
+    btn.className = "searchResult";
+    btn.type = "button";
 
-    const title = document.createElement("strong");
-    title.textContent = school.name;
+    const name = document.createElement("strong");
+    name.textContent = school.name;
 
     const subtitle = document.createElement("div");
     subtitle.className = "small";
     subtitle.textContent =
-      (school.state || "United States") +
-      (school.verified ? " · Admissions profile available" : "");
+      (school.state||"United States") +
+      (school.verified?" · Admissions starter profile":" · Requirements to verify");
 
-    button.append(title,subtitle);
-
-    button.onclick = () => {
+    btn.append(name,subtitle);
+    btn.onclick=()=>{
       openCollegeEditor(null,school);
       $("collegeSearch").value = school.name;
       box.classList.add("hidden");
       $("searchStatus").textContent = school.name + " selected.";
-
-      $("collegeEditor").scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-      });
+      $("collegeEditor").scrollIntoView({behavior:"smooth"});
     };
-
-    box.appendChild(button);
+    box.appendChild(btn);
   });
 
   box.classList.remove("hidden");
 }
 
-async function searchOnline(query,version){
-  const local = schoolMatch(query);
-
-  renderSearchResults(
-    local,
-    local.length
-      ? "Showing matches. Searching additional universities..."
-      : "Searching university directory..."
-  );
+async function searchUniversities(query,version){
+  const local = schoolMatches(query);
+  renderSearchResults(local,"Searching university directory...");
 
   try{
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(),5000);
-
+    const timeout = setTimeout(()=>controller.abort(),5000);
     let response;
 
     try{
       response = await fetch(
-        "https://universities.hipolabs.com/search" +
-        "?country=United%20States&name=" +
+        "https://universities.hipolabs.com/search?country=United%20States&name=" +
         encodeURIComponent(query),
         {signal:controller.signal}
       );
@@ -970,671 +715,725 @@ async function searchOnline(query,version){
       clearTimeout(timeout);
     }
 
-    if(!response.ok) throw new Error("Directory unavailable");
-
-    const online = await response.json();
-
-    if(version !== searchVersion) return;
+    if(!response.ok) throw Error("Directory unavailable");
+    const remote = await response.json();
+    if(version!==searchVersion) return;
 
     const results = [...local];
-    const seen = new Set(results.map(s => norm(s.name)));
+    const seen = new Set(results.map(s=>normalize(s.name)));
 
-    online.forEach(entry => {
-      if(!entry.name) return;
-
-      const key = norm(entry.name);
-
-      if(seen.has(key)) return;
-      seen.add(key);
-
-      const website = (entry.web_pages || [])
-        .find(validURL) || "";
-
+    remote.forEach(s=>{
+      if(!s.name || seen.has(normalize(s.name))) return;
+      seen.add(normalize(s.name));
       results.push({
-        name:entry.name,
-        state:entry["state-province"] || "United States",
-        aliases:[],
-        website,
+        name:s.name,
+        state:s["state-province"]||"United States",
+        website:(s.web_pages||[]).find(validURL)||"",
         verified:false,
-        requirements:[...GENERAL_CHECKLIST],
-        note:"Official university website from a public directory. Admissions-specific requirements are not verified."
+        requirements:[...GENERIC_REQUIREMENTS],
+        note:"University website from a public directory; admissions requirements not verified."
       });
     });
 
     renderSearchResults(
       results,
-      results.length
-        ? results.length + " universities found."
-        : "No results. You can add a university manually."
+      results.length + " results. Select a university to add it."
     );
-
   }catch{
-    if(version !== searchVersion) return;
-
+    if(version!==searchVersion) return;
     renderSearchResults(
       local,
-      local.length
-        ? "Showing built-in results. Online directory unavailable."
-        : "Online search unavailable. Use Add Manually."
+      "Online search unavailable. Showing built-in matches."
     );
   }
 }
 
-$("collegeSearch").oninput = () => {
+$("collegeSearch").addEventListener("input",()=>{
   clearTimeout(searchTimer);
-
-  const query = $("collegeSearch").value.trim();
+  const q = $("collegeSearch").value.trim();
   const version = ++searchVersion;
 
-  if(query.length < 2){
+  if(q.length<2){
     $("searchResults").classList.add("hidden");
     $("searchStatus").textContent = "Type at least 2 characters.";
     return;
   }
 
-  renderSearchResults(
-    schoolMatch(query),
-    "Showing built-in matches..."
-  );
+  renderSearchResults(schoolMatches(q),"Showing built-in matches...");
+  searchTimer=setTimeout(()=>searchUniversities(q,version),350);
+});
 
-  searchTimer = setTimeout(
-    () => searchOnline(query,version),
-    350
-  );
-};
+/* ==========================================================
+   AUTHENTICATION AND SAVING
+   ========================================================== */
 
-/* ======================================================
-   CLOUD SAVING
-   ====================================================== */
+let user = null;
+let data = blankData();
+let ready = false;
+let authMode = "signin";
+let loadToken = 0;
+let dataRevision = 0;
+let cloudRevision = 0;
+let syncTimer = null;
+let syncPromise = null;
+let storageError = "";
+let cloudLoaded = false;
+let lastCloudError = "";
+let signInPromise = null;
 
 function cacheKey(){
   return "applypilot-cloud-cache-" + user.id;
 }
 
-function cloudMessage(message){
-  $("cloudStatus").textContent = message;
-  $("profileCloudStatus").textContent = message;
-  $("saveStatus").textContent = message;
+function dirtyKey(){
+  return cacheKey() + "-pending";
 }
 
-function localBackup(){
-  if(!user) return;
+function readLocal(key){
+  try{
+    const raw=localStorage.getItem(key);
+    return raw ? JSON.parse(raw) : null;
+  }catch{return null;}
+}
 
+function backupLocal(){
+  if(!user) return false;
   try{
     localStorage.setItem(cacheKey(),JSON.stringify(data));
+    localStorage.setItem(dirtyKey(),"1");
+    return true;
   }catch(error){
-    console.warn("Local backup unavailable",error);
+    console.error(error);
+    storageError="Local browser storage failed: "+error.message;
+    message(storageError,"warn");
+    return false;
   }
 }
 
-function readCache(){
-  try{
-    const raw = localStorage.getItem(cacheKey());
-    return raw ? JSON.parse(raw) : null;
-  }catch{
-    return null;
+function updateStorageStatus(){
+  if(!ready){
+    storageMessage("Storage: loading...");
+  }else if(lastCloudError){
+    storageMessage(
+      "Saved locally; cloud sync failed. Use Retry Cloud Sync."
+    );
+  }else if(dataRevision>cloudRevision){
+    storageMessage("Saved locally; syncing cloud...");
+  }else{
+    storageMessage("Saved to cloud ✓");
   }
 }
 
-function markChanged(){
-  if(!ready || !user) return;
+function changeData(){
+  if(!ready||!user) return;
 
-  changeVersion++;
-  localBackup();
-  cloudMessage("Cloud: saving...");
+  dataRevision++;
+  const localOK=backupLocal();
 
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(saveCloud,650);
+  if(!localOK){
+    storageMessage("Save failed: browser storage unavailable");
+    return;
+  }
+
+  lastCloudError="";
+  updateStorageStatus();
+  clearTimeout(syncTimer);
+  syncTimer=setTimeout(()=>syncCloud(),500);
 }
 
-async function saveCloud(){
-  if(!ready || !user || saving) return;
-  if(changeVersion <= savedVersion) return;
+async function syncCloud(){
+  if(!ready||!user||!db) return false;
 
-  saving = true;
+  if(syncPromise){
+    await syncPromise;
+    if(dataRevision<=cloudRevision) return true;
+  }
 
-  const accountId = user.id;
-  const version = changeVersion;
-  const snapshot = JSON.parse(JSON.stringify(data));
+  const accountId=user.id;
+  const snapshot=JSON.parse(JSON.stringify(data));
+  const version=dataRevision;
 
-  const {error} = await db
-    .from("applypilot_data")
-    .upsert({
+  syncPromise=(async()=>{
+    const {error}=await db.from("applypilot_data").upsert({
       user_id:accountId,
       content:snapshot,
       updated_at:new Date().toISOString()
     },{onConflict:"user_id"});
 
-  saving = false;
+    if(error) throw error;
+    return true;
+  })();
 
-  if(!user || user.id !== accountId) return;
+  try{
+    await syncPromise;
+    if(!user||user.id!==accountId) return false;
 
-  if(error){
-    console.error(error);
-    cloudMessage("Cloud save failed — local backup kept");
-    return;
-  }
+    cloudRevision=version;
+    lastCloudError="";
 
-  savedVersion = version;
+    if(dataRevision===cloudRevision){
+      try{localStorage.removeItem(dirtyKey());}catch{}
+    }
 
-  if(changeVersion > savedVersion){
-    clearTimeout(saveTimer);
-    saveTimer = setTimeout(saveCloud,200);
-  }else{
-    cloudMessage("Cloud: saved ✓");
+    updateStorageStatus();
+
+    if(dataRevision>cloudRevision){
+      return await syncCloud();
+    }
+
+    return true;
+  }catch(error){
+    console.error("Supabase save error:",error);
+    if(user?.id===accountId){
+      lastCloudError=error.message;
+      updateStorageStatus();
+      message(
+        "Your changes are saved in this browser, but Supabase cloud saving failed: "+
+        error.message+
+        ". Check the SQL table and permissions, then click Retry Cloud Sync.",
+        "warn"
+      );
+    }
+    return false;
+  }finally{
+    syncPromise=null;
   }
 }
 
-async function loadCloud(account){
-  const version = ++loadVersion;
+async function saveNow(){
+  if(!ready) return false;
+  clearTimeout(syncTimer);
+  return await syncCloud();
+}
 
-  ready = false;
-  data = blankData();
-  changeVersion = 0;
-  savedVersion = 0;
+async function loadAccount(account){
+  const token=++loadToken;
 
-  cloudMessage("Cloud: loading...");
+  user=account;
+  ready=false;
+  cloudLoaded=false;
+  data=blankData();
+  dataRevision=0;
+  cloudRevision=0;
+  lastCloudError="";
+  clearTimeout(syncTimer);
+  storageMessage("Storage: loading...");
 
-  const {data:record,error} = await db
-    .from("applypilot_data")
-    .select("content")
-    .eq("user_id",account.id)
-    .maybeSingle();
+  const local=readLocal(cacheKey());
+  const pending=localStorage.getItem(dirtyKey())==="1";
 
-  if(
-    version !== loadVersion ||
-    !user ||
-    user.id !== account.id
-  ) return;
+  let remote=null;
+  let fetchError=null;
+
+  try{
+    const result=await db.from("applypilot_data")
+      .select("content")
+      .eq("user_id",account.id)
+      .maybeSingle();
+
+    fetchError=result.error;
+    remote=result.data?.content||null;
+  }catch(error){
+    fetchError=error;
+  }
+
+  if(token!==loadToken || user?.id!==account.id) return;
+
+  cloudLoaded=!fetchError;
+
+  // Pending local changes take precedence over older cloud data.
+  // This prevents a failed cloud save from silently erasing edits.
+  if(pending&&local){
+    data=sanitizeData(local);
+    dataRevision=1;
+    cloudRevision=0;
+  }else if(remote){
+    data=sanitizeData(remote);
+    dataRevision=0;
+    cloudRevision=0;
+  }else if(local){
+    data=sanitizeData(local);
+    dataRevision=1;
+    cloudRevision=0;
+  }else{
+    data=blankData();
+    dataRevision=1;
+    cloudRevision=0;
+  }
+
+  $("accountEmail").textContent=account.email||"";
+  $("profileEmail").textContent=account.email||"";
+  $("profileName").value=data.name;
+  $("essayText").value=data.essay;
+  $("essayPrompt").value=data.prompt;
 
   $("authPage").classList.add("hidden");
   $("appPage").classList.remove("hidden");
 
-  $("accountEmail").textContent = account.email || "";
-  $("profileEmail").textContent = account.email || "";
+  ready=true;
+  renderAll();
+  updateWordCount();
+  openPage("dashboard");
 
-  if(error){
-    console.error(error);
-    cloudMessage("Cloud unavailable — check Supabase SQL setup");
-    return;
+  if(fetchError){
+    lastCloudError=fetchError.message;
+    message(
+      "Cloud database could not load: "+fetchError.message+
+      ". You can still edit locally on this device. Set up the Supabase SQL table to enable cloud saving.",
+      "warn"
+    );
+  }else{
+    hideMessage();
+    if(dataRevision>cloudRevision){
+      backupLocal();
+      syncCloud();
+    }
   }
 
-  const content = record?.content || readCache() || {};
-
-  data = {
-    ...blankData(),
-    ...content,
-    colleges:Array.isArray(content.colleges)
-      ? content.colleges : [],
-    activities:Array.isArray(content.activities)
-      ? content.activities : []
-  };
-
-  $("essayText").value = data.essay || "";
-  $("essayPrompt").value = data.prompt || "";
-  $("profileName").value = data.name || "";
-
-  ready = true;
-  cloudMessage("Cloud: connected ✓");
-
-  renderAll();
-  openPage("dashboard");
-  updateWordCount();
-
-  if(!record) markChanged();
+  updateStorageStatus();
 }
 
-/* ======================================================
-   AUTHENTICATION
-   ====================================================== */
-
 function showAuth(){
-  ++loadVersion;
-  ready = false;
-  user = null;
-
+  ++loadToken;
+  user=null;
+  ready=false;
+  clearTimeout(syncTimer);
   $("appPage").classList.add("hidden");
   $("authPage").classList.remove("hidden");
 }
 
-async function showApp(account){
+async function enterAccount(account){
   if(!account) return;
-  if(user?.id === account.id && ready) return;
+  if(user?.id===account.id && ready) return;
+  if(signInPromise) return signInPromise;
 
-  user = account;
-  await loadCloud(account);
+  signInPromise=loadAccount(account);
+  try{await signInPromise;}
+  finally{signInPromise=null;}
 }
 
-$("switchAuth").onclick = () => {
-  authMode = authMode === "signin" ? "signup" : "signin";
-
-  const signup = authMode === "signup";
-
-  $("authTitle").textContent =
-    signup ? "Create your account" : "Welcome back";
-
-  $("authSubmit").textContent =
-    signup ? "Create account" : "Sign in";
-
-  $("switchAuth").textContent =
-    signup ? "Sign in instead" : "Create an account instead";
-
-  $("authMessage").textContent = "";
+$("switchAuth").onclick=()=>{
+  authMode=authMode==="signin"?"signup":"signin";
+  const signup=authMode==="signup";
+  $("authTitle").textContent=signup?"Create your account":"Welcome back";
+  $("authSubmit").textContent=signup?"Create account":"Sign in";
+  $("switchAuth").textContent=signup?"Sign in instead":"Create an account instead";
+  $("authMessage").textContent="";
 };
 
-$("authForm").onsubmit = async event => {
+$("authForm").onsubmit=async event=>{
   event.preventDefault();
 
-  const email = $("email").value.trim();
-  const password = $("password").value;
+  if(!db){
+    $("authMessage").textContent=
+      "Supabase is not configured. Add your URL and publishable key.";
+    return;
+  }
 
-  $("authSubmit").disabled = true;
-  $("authMessage").textContent = "";
+  $("authSubmit").disabled=true;
+  $("authMessage").textContent="Connecting...";
 
   try{
-    const result = authMode === "signup"
+    const email=$("email").value.trim();
+    const password=$("password").value;
+    const result=authMode==="signup"
       ? await db.auth.signUp({email,password})
       : await db.auth.signInWithPassword({email,password});
 
     if(result.error) throw result.error;
 
     if(result.data.session){
-      await showApp(result.data.session.user);
+      await enterAccount(result.data.session.user);
     }else{
-      $("authMessage").textContent =
-        "Check your email for a confirmation link if required.";
+      $("authMessage").textContent=
+        "Check your email for a confirmation link, if required.";
     }
   }catch(error){
-    $("authMessage").textContent = error.message;
+    $("authMessage").textContent=error.message;
   }finally{
-    $("authSubmit").disabled = false;
+    $("authSubmit").disabled=false;
   }
 };
 
-$("githubLogin").onclick = async () => {
-  $("githubLogin").disabled = true;
+$("githubLogin").onclick=async()=>{
+  if(!db){
+    $("authMessage").textContent=
+      "Add your Supabase URL and publishable key first.";
+    return;
+  }
 
-  const {error} = await db.auth.signInWithOAuth({
-    provider:"github",
-    options:{
-      redirectTo:location.origin + location.pathname
+  $("githubLogin").disabled=true;
+  $("authMessage").textContent="Opening GitHub sign-in...";
+
+  try{
+    /*
+      Redirect to the exact ApplyPilot page currently open.
+      The page must be listed in Supabase allowed redirect URLs.
+    */
+    const redirectTo=location.origin+location.pathname;
+
+    const {error}=await db.auth.signInWithOAuth({
+      provider:"github",
+      options:{redirectTo}
+    });
+
+    if(error) throw error;
+  }catch(error){
+    $("authMessage").textContent=
+      "GitHub login failed: "+error.message;
+    $("githubLogin").disabled=false;
+  }
+};
+
+$("retrySync").onclick=async()=>{
+  if(!ready) return;
+  $("retrySync").disabled=true;
+  lastCloudError="";
+  updateStorageStatus();
+  await saveNow();
+  $("retrySync").disabled=false;
+};
+
+$("signOut").onclick=async()=>{
+  if(!db) return;
+  $("signOut").disabled=true;
+
+  collectEssay();
+  backupLocal();
+  const saved=await saveNow();
+
+  if(!saved && dataRevision>cloudRevision){
+    const proceed=confirm(
+      "Your changes are saved locally on this browser, but not in the cloud. "+
+      "Signing out now may make them unavailable on other devices. Sign out anyway?"
+    );
+    if(!proceed){
+      $("signOut").disabled=false;
+      return;
+    }
+  }
+
+  const {error}=await db.auth.signOut();
+
+  if(error){
+    message("Sign-out failed: "+error.message,"warn");
+  }else{
+    showAuth();
+  }
+
+  $("signOut").disabled=false;
+};
+
+if(db){
+  db.auth.onAuthStateChange((event,session)=>{
+    if(event==="SIGNED_OUT"){
+      showAuth();
+    }else if(event==="SIGNED_IN" && session){
+      setTimeout(()=>enterAccount(session.user),0);
     }
   });
+}
 
-  if(error){
-    $("authMessage").textContent = error.message;
-    $("githubLogin").disabled = false;
-  }
-};
-
-$("signOut").onclick = async () => {
-  if(ready){
-    data.essay = $("essayText").value;
-    data.prompt = $("essayPrompt").value;
-    localBackup();
-    await saveCloud();
-  }
-
-  const {error} = await db.auth.signOut();
-
-  if(error){
-    alert(error.message);
-    return;
-  }
-
-  showAuth();
-};
-
-db.auth.onAuthStateChange((event,session) => {
-  if(event === "SIGNED_OUT") showAuth();
-
-  if(event === "SIGNED_IN" && session){
-    setTimeout(() => showApp(session.user),0);
-  }
-});
-
-/* ======================================================
+/* ==========================================================
    NAVIGATION
-   ====================================================== */
+   ========================================================== */
 
 function openPage(page){
-  document.querySelectorAll(".section").forEach(section => {
-    section.classList.toggle("active",section.id === page);
+  document.querySelectorAll(".section").forEach(section=>{
+    section.classList.toggle("active",section.id===page);
   });
 
-  document.querySelectorAll("nav button").forEach(button => {
-    button.classList.toggle(
-      "active",
-      button.dataset.page === page
-    );
+  document.querySelectorAll("nav button").forEach(button=>{
+    button.classList.toggle("active",button.dataset.page===page);
   });
 
-  if(page === "review") renderReadiness();
+  if(page==="review") renderReadiness();
 }
 
-document.querySelectorAll("[data-page],[data-go]")
-  .forEach(button => {
-    button.onclick = () => openPage(
-      button.dataset.page || button.dataset.go
-    );
-  });
+document.querySelectorAll("[data-page],[data-go]").forEach(button=>{
+  button.onclick=()=>openPage(button.dataset.page||button.dataset.go);
+});
 
-/* ======================================================
-   COLLEGE EDITOR — AUTOMATIC INFORMATION
-   ====================================================== */
+/* ==========================================================
+   COLLEGES — EDITOR AND SAVE
+   ========================================================== */
 
-let editorSchool = null;
-let editorRequirements = [];
-let editorCompleted = [];
+let editingCollege=null;
+let editorSchool=null;
+let editorRequirements=[];
+let editorCompleted=[];
 
-function showEditorRequirements(){
-  const box = $("editorRequirements");
-  box.innerHTML = "";
+function renderEditorRequirements(){
+  const box=$("editorRequirements");
+  box.replaceChildren();
 
-  if(!editorRequirements.length){
-    box.innerHTML =
-      '<p class="small">No requirements available.</p>';
-    return;
-  }
+  editorRequirements.forEach(requirement=>{
+    const line=document.createElement("label");
+    line.className="check";
 
-  editorRequirements.forEach((requirement,index) => {
-    const label = document.createElement("label");
-    label.className = "check";
+    const checkbox=document.createElement("input");
+    checkbox.type="checkbox";
+    checkbox.checked=editorCompleted.includes(requirement);
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = editorCompleted.includes(requirement);
-
-    checkbox.onchange = () => {
-      editorCompleted = checkbox.checked
-        ? [...new Set([...editorCompleted,requirement])]
-        : editorCompleted.filter(r => r !== requirement);
+    checkbox.onchange=()=>{
+      if(checkbox.checked){
+        editorCompleted=[...new Set([...editorCompleted,requirement])];
+      }else{
+        editorCompleted=editorCompleted.filter(r=>r!==requirement);
+      }
     };
 
-    const text = document.createElement("span");
-    text.textContent = requirement;
+    const text=document.createElement("span");
+    text.textContent=requirement;
 
-    label.append(checkbox,text);
-    box.appendChild(label);
+    line.append(checkbox,text);
+    box.appendChild(line);
   });
 }
 
-function showEditorInfo(){
-  const info = $("collegeInfo");
-
-  if(editorSchool.verified){
-    info.className = "notice success";
-    info.textContent =
-      "✓ Official-source starter profile. " +
-      editorSchool.note +
-      " Verify your application year and applicant type.";
-  }else{
-    info.className = "notice";
-    info.textContent =
-      "Requirements to verify — not a confirmed university-specific list. " +
-      (editorSchool.note || "");
-  }
-
-  safeLink(
+function refreshEditorWebsite(){
+  const url=$("collegeURL").value.trim();
+  linkInto(
     $("collegeWebsiteBox"),
-    editorSchool.website,
-    editorSchool.verified
-      ? "Open official admissions requirements ↗"
-      : "Open official university website ↗"
+    url,
+    editorSchool?.verified
+      ? "Open official admissions page ↗"
+      : "Open university website ↗"
   );
-
-  showEditorRequirements();
 }
 
-function openCollegeEditor(collegeId=null,selectedSchool=null){
-  editingCollege = collegeId;
-
-  const existing = collegeId
-    ? data.colleges.find(c => c.id === collegeId)
+function openCollegeEditor(collegeId=null,selected=null){
+  editingCollege=collegeId;
+  const existing=collegeId
+    ? data.colleges.find(c=>c.id===collegeId)
     : null;
 
-  if(existing){
-    editorSchool = {
-      name:existing.name,
-      website:existing.website || "",
-      verified:!!existing.verified,
-      note:existing.sourceNote || ""
-    };
+  editorSchool=existing
+    ? {
+        name:existing.name,
+        website:existing.website||"",
+        verified:!!existing.verified,
+        note:existing.sourceNote||""
+      }
+    : selected||{
+        name:"",website:"",verified:false,
+        note:"No verified admissions profile selected."
+      };
 
-    editorRequirements = [...(existing.requirements || [])];
-    editorCompleted = [...(existing.completed || [])];
+  editorRequirements=[
+    ...(existing?.requirements||selected?.requirements||GENERIC_REQUIREMENTS)
+  ];
 
-  }else{
-    editorSchool = selectedSchool || {
-      name:"",
-      website:"",
-      verified:false,
-      note:"Add a university from search for automatic website lookup."
-    };
+  editorCompleted=[...(existing?.completed||[])];
 
-    editorRequirements = [
-      ...(editorSchool.requirements || GENERAL_CHECKLIST)
-    ];
+  $("collegeEditorTitle").textContent=existing?"Edit College":"Add College";
+  $("collegeName").value=existing?.name||editorSchool.name||"";
+  $("collegeDeadline").value=existing?.deadline||"";
+  $("collegeStatus").value=existing?.status||"Researching";
+  $("collegeNotes").value=existing?.notes||"";
+  $("collegeURL").value=existing?.website||editorSchool.website||"";
 
-    editorCompleted = [];
-  }
+  const info=$("collegeInfo");
+  info.className="notice "+(editorSchool.verified?"good":"warn");
+  info.textContent=editorSchool.verified
+    ? "Official-source starter profile, not a guarantee of every requirement. "+editorSchool.note
+    : "Requirements below are a checklist to verify, not confirmed admissions requirements. "+editorSchool.note;
 
-  $("collegeEditorTitle").textContent =
-    existing ? "Edit College" : "Add College";
-
-  $("collegeName").value =
-    existing?.name || editorSchool.name || "";
-
-  $("collegeDeadline").value = existing?.deadline || "";
-  $("collegeStatus").value =
-    existing?.status || "Researching";
-
-  $("collegeNotes").value = existing?.notes || "";
-
-  showEditorInfo();
-
+  refreshEditorWebsite();
+  renderEditorRequirements();
   $("collegeEditor").classList.remove("hidden");
 }
 
-$("addCollege").onclick = () => {
+$("collegeURL").addEventListener("input",refreshEditorWebsite);
+
+$("addCollege").onclick=()=>{
   openCollegeEditor();
   $("collegeEditor").scrollIntoView({behavior:"smooth"});
 };
 
-$("cancelCollege").onclick = () => {
-  editingCollege = null;
+$("cancelCollege").onclick=()=>{
+  editingCollege=null;
   $("collegeEditor").classList.add("hidden");
 };
 
-$("saveCollege").onclick = () => {
+$("addRequirement").onclick=()=>{
+  const text=$("customRequirement").value.trim();
+  if(!text) return;
+  if(!editorRequirements.includes(text)){
+    editorRequirements.push(text);
+  }
+  $("customRequirement").value="";
+  renderEditorRequirements();
+};
+
+$("saveCollege").onclick=async()=>{
   if(!ready) return;
 
-  const name = $("collegeName").value.trim();
+  const name=$("collegeName").value.trim();
+  const website=$("collegeURL").value.trim();
 
   if(!name){
     alert("Enter a university name.");
     return;
   }
 
-  const values = {
+  if(website && !validURL(website)){
+    alert("Enter a valid website starting with https://");
+    return;
+  }
+
+  const values={
     name,
     deadline:$("collegeDeadline").value,
     status:$("collegeStatus").value,
     notes:$("collegeNotes").value,
-    website:editorSchool.website || "",
-    verified:!!editorSchool.verified,
-    sourceNote:editorSchool.note || "",
+    website,
+    verified:!!editorSchool.verified &&
+      normalize(name)===normalize(editorSchool.name),
+    sourceNote:editorSchool.note||"",
     requirements:[...editorRequirements],
     completed:[...editorCompleted]
   };
 
   if(editingCollege){
-    const index = data.colleges.findIndex(
-      c => c.id === editingCollege
-    );
-
-    if(index >= 0){
-      data.colleges[index] = {
-        ...data.colleges[index],
-        ...values
-      };
+    const index=data.colleges.findIndex(c=>c.id===editingCollege);
+    if(index>=0){
+      data.colleges[index]={...data.colleges[index],...values};
     }
   }else{
-    data.colleges.push({
-      id:id(),
-      ...values
-    });
+    data.colleges.push({id:makeId(),...values});
   }
 
-  editingCollege = null;
+  editingCollege=null;
   $("collegeEditor").classList.add("hidden");
-
-  markChanged();
+  changeData();
   renderAll();
+
+  message("College saved in your browser. Cloud sync status is shown in the sidebar.","good");
 };
 
 function renderColleges(){
-  const box = $("collegeList");
-  box.innerHTML = "";
+  const box=$("collegeList");
+  box.replaceChildren();
 
   if(!data.colleges.length){
-    box.innerHTML =
-      '<div class="card muted">No colleges added yet.</div>';
+    box.innerHTML='<div class="card muted">No colleges added yet.</div>';
     return;
   }
 
-  data.colleges.forEach(college => {
-    const card = document.createElement("div");
-    card.className = "card";
+  data.colleges.forEach(college=>{
+    const requirements=college.requirements||[];
+    const completed=college.completed||[];
+    const card=document.createElement("div");
+    card.className="card";
 
-    const requirements = college.requirements || [];
-    const completed = college.completed || [];
-
-    card.innerHTML = `
+    card.innerHTML=`
       <div class="row between">
         <div>
           <h3>${escapeHTML(college.name)}</h3>
-          <span class="pill">${escapeHTML(college.status)}</span>
-          <p class="small">
-            Deadline: ${escapeHTML(college.deadline || "Not set")}
-          </p>
+          <span class="pill">${escapeHTML(college.status||"Researching")}</span>
+          <p class="small">Deadline: ${escapeHTML(college.deadline||"Not set")}</p>
         </div>
         <div class="row">
           <button class="btn secondary edit">Edit</button>
           <button class="btn danger remove">Remove</button>
         </div>
       </div>
-
-      <div class="notice ${college.verified ? "success" : ""}">
+      <div class="notice ${college.verified?"good":"warn"}">
         ${college.verified
-          ? "Official-source starter profile"
-          : "Requirements need university verification"}
+          ?"Official-source starter checklist; confirm current details."
+          :"Checklist requires university verification."}
       </div>
-
       <div class="website"></div>
-
       <h3 style="margin-top:22px">
-        Requirements: ${completed.length}/${requirements.length}
+        Requirements: ${requirements.filter(r=>completed.includes(r)).length}/${requirements.length}
       </h3>
-
       <div class="checks"></div>
-
-      <p>${escapeHTML(college.notes || "")}</p>
-      <p class="small">${escapeHTML(college.sourceNote || "")}</p>
+      <p>${escapeHTML(college.notes||"")}</p>
+      <p class="small">${escapeHTML(college.sourceNote||"")}</p>
     `;
 
-    card.querySelector(".edit").onclick = () => {
+    card.querySelector(".edit").onclick=()=>{
       openCollegeEditor(college.id);
       $("collegeEditor").scrollIntoView({behavior:"smooth"});
     };
 
-    card.querySelector(".remove").onclick = () => {
+    card.querySelector(".remove").onclick=()=>{
       if(!confirm("Remove this college?")) return;
-
-      data.colleges = data.colleges.filter(
-        c => c.id !== college.id
-      );
-
-      markChanged();
+      data.colleges=data.colleges.filter(c=>c.id!==college.id);
+      changeData();
       renderAll();
+      message("College removed and saved locally.","good");
     };
 
-    safeLink(
+    linkInto(
       card.querySelector(".website"),
       college.website,
-      college.verified
-        ? "Official admissions page ↗"
-        : "University website ↗"
+      college.verified?"Official admissions page ↗":"University website ↗"
     );
 
-    const checks = card.querySelector(".checks");
+    const checks=card.querySelector(".checks");
 
-    requirements.forEach(requirement => {
-      const label = document.createElement("label");
-      label.className = "check";
+    requirements.forEach(requirement=>{
+      const line=document.createElement("label");
+      line.className="check";
 
-      const checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      checkbox.checked = completed.includes(requirement);
+      const checkbox=document.createElement("input");
+      checkbox.type="checkbox";
+      checkbox.checked=completed.includes(requirement);
 
-      checkbox.onchange = () => {
-        const current = college.completed || [];
-
-        college.completed = checkbox.checked
+      checkbox.onchange=()=>{
+        const current=college.completed||[];
+        college.completed=checkbox.checked
           ? [...new Set([...current,requirement])]
-          : current.filter(r => r !== requirement);
+          : current.filter(r=>r!==requirement);
 
-        markChanged();
+        changeData();
         renderAll();
       };
 
-      const text = document.createElement("span");
-      text.textContent = requirement;
-
-      label.append(checkbox,text);
-      checks.appendChild(label);
+      const text=document.createElement("span");
+      text.textContent=requirement;
+      line.append(checkbox,text);
+      checks.appendChild(line);
     });
 
     box.appendChild(card);
   });
 }
 
-/* ======================================================
-   ACTIVITIES
-   ====================================================== */
+/* ==========================================================
+   ACTIVITIES — EDITOR AND SAVE
+   ========================================================== */
+
+let editingActivity=null;
 
 function openActivityEditor(activityId=null){
-  editingActivity = activityId;
+  editingActivity=activityId;
 
-  const activity = activityId
-    ? data.activities.find(a => a.id === activityId)
+  const activity=activityId
+    ? data.activities.find(a=>a.id===activityId)
     : null;
 
-  $("activityEditorTitle").textContent =
-    activity ? "Edit Activity" : "Add Activity";
-
-  $("activityName").value = activity?.name || "";
-  $("activityRole").value = activity?.role || "";
-  $("activityDescription").value =
-    activity?.description || "";
-
+  $("activityEditorTitle").textContent=activity?"Edit Activity":"Add Activity";
+  $("activityName").value=activity?.name||"";
+  $("activityRole").value=activity?.role||"";
+  $("activityDescription").value=activity?.description||"";
   $("activityEditor").classList.remove("hidden");
+  $("activityEditor").scrollIntoView({behavior:"smooth"});
 }
 
-$("addActivity").onclick = () => {
-  openActivityEditor();
-  $("activityEditor").scrollIntoView({behavior:"smooth"});
-};
+$("addActivity").onclick=()=>openActivityEditor();
 
-$("cancelActivity").onclick = () => {
-  editingActivity = null;
+$("cancelActivity").onclick=()=>{
+  editingActivity=null;
   $("activityEditor").classList.add("hidden");
 };
 
-$("saveActivity").onclick = () => {
+$("saveActivity").onclick=()=>{
   if(!ready) return;
 
-  const values = {
+  const values={
     name:$("activityName").value.trim(),
     role:$("activityRole").value.trim(),
     description:$("activityDescription").value.trim()
@@ -1646,66 +1445,54 @@ $("saveActivity").onclick = () => {
   }
 
   if(editingActivity){
-    const index = data.activities.findIndex(
-      a => a.id === editingActivity
-    );
-
-    if(index >= 0){
-      data.activities[index] = {
-        ...data.activities[index],
-        ...values
-      };
+    const index=data.activities.findIndex(a=>a.id===editingActivity);
+    if(index>=0){
+      data.activities[index]={...data.activities[index],...values};
     }
   }else{
-    data.activities.push({id:id(),...values});
+    data.activities.push({id:makeId(),...values});
   }
 
-  editingActivity = null;
+  editingActivity=null;
   $("activityEditor").classList.add("hidden");
-
-  markChanged();
+  changeData();
   renderAll();
+  message("Activity saved in your browser. Cloud sync is shown in the sidebar.","good");
 };
 
 function renderActivities(){
-  const box = $("activityList");
-  box.innerHTML = "";
+  const box=$("activityList");
+  box.replaceChildren();
 
   if(!data.activities.length){
-    box.innerHTML =
-      '<div class="card muted">No activities added yet.</div>';
+    box.innerHTML='<div class="card muted">No activities added yet.</div>';
     return;
   }
 
-  data.activities.forEach(activity => {
-    const card = document.createElement("div");
-    card.className = "card";
+  data.activities.forEach(activity=>{
+    const card=document.createElement("div");
+    card.className="card";
 
-    card.innerHTML = `
+    card.innerHTML=`
       <div class="row between">
         <div>
           <h3>${escapeHTML(activity.name)}</h3>
-          <p class="small">${escapeHTML(activity.role)}</p>
+          <p class="small">${escapeHTML(activity.role||"")}</p>
         </div>
         <div class="row">
           <button class="btn secondary edit">Edit</button>
           <button class="btn danger remove">Remove</button>
         </div>
       </div>
-      <p>${escapeHTML(activity.description)}</p>
+      <p>${escapeHTML(activity.description||"")}</p>
     `;
 
-    card.querySelector(".edit").onclick =
-      () => openActivityEditor(activity.id);
+    card.querySelector(".edit").onclick=()=>openActivityEditor(activity.id);
 
-    card.querySelector(".remove").onclick = () => {
+    card.querySelector(".remove").onclick=()=>{
       if(!confirm("Remove this activity?")) return;
-
-      data.activities = data.activities.filter(
-        a => a.id !== activity.id
-      );
-
-      markChanged();
+      data.activities=data.activities.filter(a=>a.id!==activity.id);
+      changeData();
       renderAll();
     };
 
@@ -1713,210 +1500,216 @@ function renderActivities(){
   });
 }
 
-/* ======================================================
-   ESSAY
-   ====================================================== */
+/* ==========================================================
+   ESSAY AND PROFILE — SAVE
+   ========================================================== */
 
 function collectEssay(){
-  data.essay = $("essayText").value;
-  data.prompt = $("essayPrompt").value;
+  data.essay=$("essayText").value;
+  data.prompt=$("essayPrompt").value;
 }
 
 function updateWordCount(){
-  const text = $("essayText").value.trim();
-  const words = text ? text.split(/\s+/).length : 0;
-  $("wordCount").textContent = words + " words";
+  const text=$("essayText").value.trim();
+  const count=text?text.split(/\s+/).length:0;
+  $("wordCount").textContent=count+" words";
 }
 
-["essayText","essayPrompt"].forEach(field => {
-  $(field).oninput = () => {
+["essayText","essayPrompt"].forEach(field=>{
+  $(field).addEventListener("input",()=>{
     if(!ready) return;
-
     collectEssay();
     updateWordCount();
-    markChanged();
+    changeData();
     renderDashboard();
-  };
+  });
 });
 
-$("saveEssay").onclick = async () => {
+$("saveEssay").onclick=async()=>{
+  if(!ready) return;
   collectEssay();
-  markChanged();
-  await saveCloud();
+  changeData();
+  const ok=await saveNow();
+
+  message(
+    ok
+      ?"Essay saved to Supabase cloud."
+      :"Essay saved locally. Cloud sync needs attention.",
+    ok?"good":"warn"
+  );
 };
 
-window.addEventListener("pagehide",() => {
+$("profileName").addEventListener("input",()=>{
   if(!ready) return;
-  collectEssay();
-  localBackup();
-});
-
-/* ======================================================
-   PROFILE
-   ====================================================== */
-
-$("profileName").oninput = () => {
-  if(!ready) return;
-
-  data.name = $("profileName").value;
-  markChanged();
+  data.name=$("profileName").value;
+  changeData();
   renderDashboard();
+});
+
+$("saveProfile").onclick=async()=>{
+  if(!ready) return;
+  data.name=$("profileName").value.trim();
+  changeData();
+  const ok=await saveNow();
+
+  message(
+    ok?"Profile saved to Supabase cloud.":"Profile saved locally; cloud sync failed.",
+    ok?"good":"warn"
+  );
 };
 
-$("saveProfile").onclick = async () => {
+$("exportBackup").onclick=()=>{
   if(!ready) return;
 
-  data.name = $("profileName").value.trim();
-  markChanged();
-  await saveCloud();
+  collectEssay();
+  backupLocal();
+
+  const blob=new Blob(
+    [JSON.stringify(data,null,2)],
+    {type:"application/json"}
+  );
+
+  const url=URL.createObjectURL(blob);
+  const link=document.createElement("a");
+  link.href=url;
+  link.download="applypilot-backup.json";
+  link.click();
+
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
 };
 
-/* ======================================================
+window.addEventListener("pagehide",()=>{
+  if(!ready) return;
+  collectEssay();
+  backupLocal();
+});
+
+/* ==========================================================
    DASHBOARD
-   ====================================================== */
+   ========================================================== */
 
 function renderDashboard(){
   if(!user) return;
 
-  const name =
-    data.name.trim() ||
-    user.user_metadata?.user_name ||
-    user.email?.split("@")[0] ||
+  const name=
+    data.name.trim()||
+    user.user_metadata?.user_name||
+    user.email?.split("@")[0]||
     "there";
 
-  $("welcome").textContent =
-    "Welcome back, " + name + " 👋";
+  $("welcome").textContent="Welcome back, "+name+" 👋";
+  $("statColleges").textContent=data.colleges.length;
+  $("statActivities").textContent=data.activities.length;
 
-  $("statColleges").textContent = data.colleges.length;
-  $("statActivities").textContent = data.activities.length;
-
-  const checks = [
-    data.colleges.length > 0,
-    data.colleges.some(c => c.deadline),
-    data.colleges.some(c => (c.requirements || []).length),
-    data.activities.length > 0,
-    data.essay.trim().length > 0
+  const checks=[
+    data.colleges.length>0,
+    data.colleges.some(c=>c.deadline),
+    data.colleges.some(c=>(c.requirements||[]).length),
+    data.activities.length>0,
+    data.essay.trim().length>0
   ];
 
-  const progress = Math.round(
-    checks.filter(Boolean).length / checks.length * 100
+  const progress=Math.round(
+    checks.filter(Boolean).length/checks.length*100
   );
 
-  $("statProgress").textContent = progress + "%";
-  $("progressFill").style.width = progress + "%";
+  $("statProgress").textContent=progress+"%";
+  $("progressFill").style.width=progress+"%";
 
-  const today = new Date().toLocaleDateString("en-CA");
+  const now=new Date();
+  const today=[
+    now.getFullYear(),
+    String(now.getMonth()+1).padStart(2,"0"),
+    String(now.getDate()).padStart(2,"0")
+  ].join("-");
 
-  const upcoming = data.colleges
-    .filter(c => c.deadline && c.deadline >= today)
-    .sort((a,b) => a.deadline.localeCompare(b.deadline))
+  const upcoming=data.colleges
+    .filter(c=>c.deadline && c.deadline>=today)
+    .sort((a,b)=>a.deadline.localeCompare(b.deadline))
     .slice(0,5);
 
-  $("upcomingDeadlines").innerHTML = upcoming.length
-    ? upcoming.map(c => `
-      <p>
-        <strong>${escapeHTML(c.name)}</strong><br>
-        <span class="small">${escapeHTML(c.deadline)}</span>
-      </p>
-    `).join("")
+  $("upcomingDeadlines").innerHTML=upcoming.length
+    ? upcoming.map(c=>`
+        <p><strong>${escapeHTML(c.name)}</strong><br>
+        <span class="small">${escapeHTML(c.deadline)}</span></p>
+      `).join("")
     : '<p class="muted">No upcoming deadlines recorded.</p>';
 
-  const steps = [];
+  const steps=[];
 
-  if(!data.colleges.length)
-    steps.push("Add your first college.");
+  if(!data.colleges.length) steps.push("Add your first college.");
+  if(!data.activities.length) steps.push("Add an activity.");
+  if(!data.essay.trim()) steps.push("Start your personal essay.");
+  if(!steps.length) steps.push("Review requirements and deadlines.");
 
-  if(!data.activities.length)
-    steps.push("Add an activity.");
-
-  if(!data.essay.trim())
-    steps.push("Start your personal essay.");
-
-  if(!steps.length)
-    steps.push("Review university requirements and deadlines.");
-
-  $("nextSteps").innerHTML = steps
-    .map(s => `<p>○ ${escapeHTML(s)}</p>`)
-    .join("");
+  $("nextSteps").innerHTML=steps.map(s=>`<p>○ ${escapeHTML(s)}</p>`).join("");
 }
 
-/* ======================================================
+/* ==========================================================
    APPLICATION REVIEW
-   ====================================================== */
+   ========================================================== */
 
 function renderReadiness(){
-  const checks = [
-    ["At least one college added",data.colleges.length > 0],
+  const checks=[
+    ["At least one college added",data.colleges.length>0],
     [
       "All college deadlines recorded",
-      data.colleges.length > 0 &&
-      data.colleges.every(c => c.deadline)
+      data.colleges.length>0 && data.colleges.every(c=>c.deadline)
     ],
     [
-      "All college requirements checked off",
-      data.colleges.length > 0 &&
-      data.colleges.every(c =>
-        (c.requirements || []).length > 0 &&
-        (c.requirements || []).every(r =>
-          (c.completed || []).includes(r)
-        )
+      "All recorded requirements checked off",
+      data.colleges.length>0 &&
+      data.colleges.every(c=>
+        (c.requirements||[]).length>0 &&
+        c.requirements.every(r=>(c.completed||[]).includes(r))
       )
     ],
-    ["At least one activity added",data.activities.length > 0],
-    ["Personal essay started",data.essay.trim().length > 0]
+    ["At least one activity added",data.activities.length>0],
+    ["Personal essay started",data.essay.trim().length>0]
   ];
 
-  $("readiness").innerHTML = checks.map(([name,done]) => `
-    <p>${done ? "✅" : "○"} ${escapeHTML(name)}</p>
+  $("readiness").innerHTML=checks.map(([name,done])=>`
+    <p>${done?"✅":"○"} ${escapeHTML(name)}</p>
   `).join("");
 }
 
 function basicReview(section){
-  const tips = [];
+  const tips=[];
 
-  if(section === "essay" || section === "review"){
-    const words = data.essay.trim()
+  if(section==="essay"||section==="review"){
+    const words=data.essay.trim()
       ? data.essay.trim().split(/\s+/).length
       : 0;
 
     if(!words) tips.push("Start your essay.");
-    else if(words < 250)
-      tips.push("Consider adding more detail to your essay.");
-
-    if(words > 650)
-      tips.push("Check the word limit for your essay.");
+    else if(words<250) tips.push("Consider adding detail to your essay.");
+    if(words>650) tips.push("Check the word limit for your essay.");
   }
 
-  if(section === "activities" || section === "review"){
-    if(!data.activities.length)
-      tips.push("Add your activities.");
+  if(section==="activities"||section==="review"){
+    if(!data.activities.length) tips.push("Add your activities.");
 
-    data.activities.forEach(a => {
-      if(!a.role)
-        tips.push(a.name + ": Add your role.");
-
-      if((a.description || "").length < 90)
-        tips.push(a.name + ": Explain your impact more clearly.");
+    data.activities.forEach(a=>{
+      if(!a.role) tips.push(a.name+": Add your role.");
+      if((a.description||"").length<90){
+        tips.push(a.name+": Explain your impact more clearly.");
+      }
     });
   }
 
-  if(section === "colleges" || section === "review"){
-    if(!data.colleges.length)
-      tips.push("Add colleges.");
+  if(section==="colleges"||section==="review"){
+    if(!data.colleges.length) tips.push("Add colleges.");
 
-    data.colleges.forEach(c => {
-      if(!c.deadline)
-        tips.push(c.name + ": Confirm the application deadline.");
+    data.colleges.forEach(c=>{
+      if(!c.deadline) tips.push(c.name+": Confirm the deadline.");
+      if(!c.verified) tips.push(c.name+": Verify official requirements.");
 
-      if(!c.verified)
-        tips.push(c.name + ": Verify requirements on the official site.");
+      const remaining=(c.requirements||[])
+        .filter(r=>!(c.completed||[]).includes(r));
 
-      const remaining = (c.requirements || [])
-        .filter(r => !(c.completed || []).includes(r));
-
-      if(remaining.length)
-        tips.push(c.name + ": " + remaining.length +
-          " checklist items remaining.");
+      if(remaining.length){
+        tips.push(c.name+": "+remaining.length+" checklist items remaining.");
+      }
     });
   }
 
@@ -1925,115 +1718,102 @@ function basicReview(section){
     tips.push("Check official requirements before submitting.");
   }
 
-  return "BASIC REVIEW — NOT AI\n\n• " +
-    tips.join("\n• ");
+  return "BASIC REVIEW — NOT AI\n\n• "+tips.join("\n• ");
 }
 
-const answerIds = {
+const answerIds={
   colleges:"collegeAnswer",
   activities:"activityAnswer",
   essay:"essayAnswer",
   review:"reviewAnswer"
 };
 
-const questionIds = {
+const questionIds={
   colleges:"collegeQuestion",
   activities:"activityQuestion",
   essay:"essayQuestion",
   review:"reviewQuestion"
 };
 
-function showAnswer(section,message){
-  const box = $(answerIds[section]);
-  box.textContent = message;
+function showAnswer(section,text){
+  const box=$(answerIds[section]);
+  box.textContent=text;
   box.classList.remove("hidden");
 }
 
-document.querySelectorAll("[data-basic]").forEach(button => {
-  button.onclick = () => {
-    showAnswer(
-      button.dataset.basic,
-      basicReview(button.dataset.basic)
-    );
+document.querySelectorAll("[data-basic]").forEach(button=>{
+  button.onclick=()=>{
+    showAnswer(button.dataset.basic,basicReview(button.dataset.basic));
   };
 });
 
-/* ======================================================
-   REAL AI — EXISTING SUPABASE EDGE FUNCTION
-   ====================================================== */
+/* ==========================================================
+   REAL AI VIA SUPABASE EDGE FUNCTION
+   ========================================================== */
 
-document.querySelectorAll("[data-ai]").forEach(button => {
-  button.onclick = async () => {
-    const section = button.dataset.ai;
-    const question = $(questionIds[section]).value.trim();
+document.querySelectorAll("[data-ai]").forEach(button=>{
+  button.onclick=async()=>{
+    const section=button.dataset.ai;
+    const question=$(questionIds[section]).value.trim();
 
     if(!question){
       showAnswer(section,"Type a question first.");
       return;
     }
 
-    if(!ready){
-      showAnswer(section,"Wait for cloud data to finish loading.");
+    if(!ready||!db){
+      showAnswer(section,"Sign in and wait for your data to load.");
       return;
     }
 
-    button.disabled = true;
-    showAnswer(section,"Thinking...");
+    button.disabled=true;
+    showAnswer(section,"Preparing your application data...");
 
     try{
       collectEssay();
+      const saved=await saveNow();
 
-      // Ensure the latest changes are saved before AI reads
-      // the application context from Supabase.
-      if(changeVersion > savedVersion){
-        await saveCloud();
-      }
-
-      if(changeVersion > savedVersion){
-        throw new Error(
-          "Save your latest changes to the cloud before asking AI."
+      if(!saved){
+        throw Error(
+          "Cloud sync must work before AI can review your latest information."
         );
       }
 
-      const {data:sessionData,error:sessionError} =
+      const {data:sessionResult,error:sessionError}=
         await db.auth.getSession();
 
-      if(sessionError || !sessionData.session){
-        throw new Error("Please sign in again.");
+      if(sessionError||!sessionResult.session){
+        throw Error("Please sign in again.");
       }
 
-      const {data:result,error} =
-        await db.functions.invoke("applypilot-ai",{
-          body:{section,question}
-        });
+      showAnswer(section,"Thinking...");
 
-      if(error){
-        const details =
-          await error.context?.json?.().catch(() => null);
+      const {data:result,error}=await db.functions.invoke(
+        "applypilot-ai",
+        {body:{section,question}}
+      );
 
-        throw new Error(details?.error || error.message);
-      }
+      if(error) throw error;
 
       showAnswer(
         section,
-        result?.feedback || "No AI feedback returned."
+        result?.feedback||"No AI feedback returned."
       );
-
     }catch(error){
       showAnswer(
         section,
-        "AI request failed: " + error.message +
-        "\n\nCheck your Supabase Edge Function setup."
+        "AI is unavailable: "+error.message+
+        "\n\nCheck your Supabase Edge Function and API key."
       );
     }finally{
-      button.disabled = false;
+      button.disabled=false;
     }
   };
 });
 
-/* ======================================================
-   START APP
-   ====================================================== */
+/* ==========================================================
+   START APPLICATION
+   ========================================================== */
 
 function renderAll(){
   renderDashboard();
@@ -2043,26 +1823,30 @@ function renderAll(){
 }
 
 async function initialize(){
-  try{
-    const {data:session,error} =
-      await db.auth.getSession();
+  if(!db){
+    showAuth();
+    $("authMessage").textContent=
+      "Setup required: Add your Supabase URL and publishable key. "+
+      "Also check that the Supabase JavaScript library loaded.";
+    return;
+  }
 
+  try{
+    const {data:session,error}=await db.auth.getSession();
     if(error) throw error;
 
     if(session.session){
-      await showApp(session.session.user);
+      await enterAccount(session.session.user);
     }else{
       showAuth();
     }
-
   }catch(error){
     showAuth();
-    $("authMessage").textContent = error.message;
+    $("authMessage").textContent="Authentication error: "+error.message;
   }
 }
 
 initialize();
-
 </script>
 </body>
 </html>
